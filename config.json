@@ -1,0 +1,14 @@
+{
+    "SECRET_KEY": "",
+    "ALLOWED_HOSTS": [
+        "",
+        "localhost"
+    ],
+    "DATABASE": {
+        "NAME": "",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": ""
+    }
+}
