@@ -24,7 +24,6 @@ DEBUG = BASE_PATH.joinpath("debug").is_file()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
 with open(BASE_PATH.joinpath("config.json"), "r", encoding="UTF-8") as config_file:
     config = json.load(config_file)
 
@@ -37,6 +36,7 @@ ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 # Application definition
 
 INSTALLED_APPS = [
+    "account",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
