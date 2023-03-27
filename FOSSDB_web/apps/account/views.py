@@ -13,8 +13,8 @@ def sign_up(request):
             return redirect("")
     else:
         form = RegisterForm()
-    return render(request, "registration/sign_up.html", {"form": form})
+    return render(request, "registration/sign_up.html", {"title": "Sign Up", "form": form})
 
 
 def login_(request):
-    return render(request, "registration/login.html")
+    return render(request, "registration/login.html", {"title": "Login"})
