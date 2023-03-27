@@ -36,6 +36,7 @@ ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 # Application definition
 
 INSTALLED_APPS = [
+    "fossdb",
     "account",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -86,7 +87,7 @@ DATABASES = {
         "USER": config["DATABASE"]["USER"],
         "PASSWORD": config["DATABASE"]["PASSWORD"],
         "HOST": config["DATABASE"]["HOST"],
-        "PORT": config["DATABASE"]["PORT"]
+        "PORT": config["DATABASE"]["PORT"],
     }
 }
 
