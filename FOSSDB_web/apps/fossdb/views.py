@@ -10,16 +10,16 @@ def index(request):
     return render(request, "fossdb/index.html", {"title": "FOSSDB", "projects": projects})
 
 
-@login_required(login_url="account/login/")
-@permission_required("fossdb.add_post)", login_url="account/login/", raise_exception=True)
+@login_required(login_url="login/")
+@permission_required("fossdb.add_post)", login_url="login/", raise_exception=True)
 def add_project(request):
     if request.method == "POST":
-        project = ProjectForm(request.POST)
-        if project.is_valid():
-            post = project.save(commit=False)
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
             post.author = request.user
             post.save()
             return redirect("/")
     else:
-        project = ProjectForm()
-    return render(request, "main/create_project.html", {"title": "Add project", "form": project})
+        form = ProjectForm()
+    return render(request, "fossdb/add_project.html", {"title": "Add project", "form": form})
