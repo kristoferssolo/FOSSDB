@@ -24,7 +24,6 @@ DEBUG = BASE_PATH.joinpath("debug").is_file()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-
 with open(BASE_PATH.joinpath("config.json"), "r", encoding="UTF-8") as config_file:
     config = json.load(config_file)
 
@@ -38,6 +37,7 @@ ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 
 INSTALLED_APPS = [
     "fossdb",
+    "account",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -116,7 +116,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Europe/Riga"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
@@ -134,3 +134,5 @@ MEDIA_ROOT = BASE_PATH.joinpath("media")
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"

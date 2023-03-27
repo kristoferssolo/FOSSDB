@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block meta %}{% endblock %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}{{ form }}
+        <button type="submit">Post</button>
+    </form>
+{% endblock %}

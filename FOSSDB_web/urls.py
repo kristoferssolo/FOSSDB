@@ -20,8 +20,9 @@ from django.urls import include, path
 
 urlpatterns = [
     path("", include("fossdb.urls")),
+    path("", include("account.urls")),
     path("admin/", admin.site.urls),
-
+    path("", include("django.contrib.auth.urls")),
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
