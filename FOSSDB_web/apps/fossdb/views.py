@@ -19,7 +19,7 @@ def add_project(request):
             post = project.save(commit=False)
             post.author = request.user
             post.save()
-            return redirect("")
+            return redirect("/")
     else:
         project = ProjectForm()
     return render(request, "main/create_project.html", {"title": "Add project", "form": project})
