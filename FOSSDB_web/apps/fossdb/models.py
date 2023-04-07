@@ -13,10 +13,10 @@ class License(models.Model):
 
 
 class ProgrammingLanguage(models.Model):
-    name = models.CharField(max_length=100)
+    language = models.CharField(max_length=100)
 
     def __str__(self):
-        return self.name
+        return self.language
 
 
 class ProjectProgrammingLanguage(models.Model):
@@ -38,4 +38,3 @@ class Project(models.Model):
 
     def __str__(self):
         return f"{self.author} | {self.name}"
-
