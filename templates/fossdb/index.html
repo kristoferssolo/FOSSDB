@@ -12,7 +12,7 @@
     <br>
     {% for project in projects %}
         <b>@{{ project.author.username }}</b>
-        <h5>{{ project.title }}</h5>
+        <h4>{{ project.name }}</h4>
         <p>{{ project.description }}</p>
         <ul>
             {% for license in project.license.all %}
