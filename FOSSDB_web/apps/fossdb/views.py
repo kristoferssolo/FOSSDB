@@ -15,10 +15,12 @@ def index(request):
 def add_project(request):
     if request.method == "POST":
         form = ProjectForm(request.POST)
+
         if form.is_valid():
-            post = form.save(commit=False)
-            post.author = request.user
-            post.save()
+            project = form.save(commit=False)
+            project.author = request.user
+            project.save()
+            form.save_m2m()
             return redirect("/")
     else:
         form = ProjectForm()
