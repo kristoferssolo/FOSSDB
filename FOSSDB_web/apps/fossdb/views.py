@@ -6,8 +6,11 @@ from .models import Project
 
 
 def index(request):
-    projects = Project.objects.all()
-    return render(request, "fossdb/index.html", {"title": "FOSSDB", "projects": projects})
+    context = {
+        "title": "FOSSDB",
+        "projects": Project.objects.all()
+    }
+    return render(request, "fossdb/index.html", context)
 
 
 @login_required(login_url="login/")
