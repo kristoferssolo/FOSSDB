@@ -4,7 +4,18 @@
 {% block meta %}{% endblock %}
 {% block content %}
     <form method="post">
-        {% csrf_token %}{{ project_form }}
+        {% csrf_token %}
+        {{ project_form.as_p }}
+        <table>
+            {{ language_formset.management_form }}
+            {% for form in language_formset %}
+                <tr>
+                    <td>{{ form.language.label_tag }}</td>
+                    <td>{{ form.language }}</td>
+                    <td>{{ form.percentage }}</td>
+                </tr>
+            {% endfor %}
+        </table>
         <button type="submit">Post</button>
     </form>
 {% endblock %}
