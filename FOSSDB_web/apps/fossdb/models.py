@@ -14,13 +14,13 @@ class License(models.Model):
 
 class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=255)
+    title = models.CharField(max_length=255, null=False)
     description = models.TextField()
     license = models.ManyToManyField(License)
     create_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.repo_name
+        return f"{self.author} | {self.title}"
 
     def get_absolute_url(self):
         return f"/projects/{self.id}"
