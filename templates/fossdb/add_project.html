@@ -4,7 +4,7 @@
 {% block meta %}{% endblock %}
 {% block content %}
     <form method="post">
-        {% csrf_token %}{{ form }}
+        {% csrf_token %}{{ project_form }}
         <button type="submit">Post</button>
     </form>
 {% endblock %}
