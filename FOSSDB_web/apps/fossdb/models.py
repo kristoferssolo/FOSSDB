@@ -33,10 +33,9 @@ class Project(models.Model):
     name = models.CharField(max_length=255, null=False)
     description = models.TextField()
     licenses = models.ManyToManyField(License)
+    programming_languages = models.ManyToManyField(ProgrammingLanguage, through="ProjectProgrammingLanguage", related_name="projects")
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.author} | {self.name}"
 
-    def get_absolute_url(self):
-        return f"/projects/{self.id}"
