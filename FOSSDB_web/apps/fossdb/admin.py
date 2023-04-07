@@ -1,6 +1,24 @@
 from django.contrib import admin
+from django.forms import inlineformset_factory
 
-from .models import License, Project
+from .models import (License, ProgrammingLanguage, Project,
+                     ProjectProgrammingLanguage)
 
-admin.site.register(Project)
+
+class ProjectProgrammingLanguageInline(admin.TabularInline):
+    model = ProjectProgrammingLanguage
+    extra = 1
+
+
+class ProjectAdmin(admin.ModelAdmin):
+    inlines = [ProjectProgrammingLanguageInline]
+    list_display = ("author", "name", "get_languages")
+
+    def get_languages(self, object):
+        return " | ".join([i.language.name for i in object.projectprogramminglanguage_set.all()])
+
+
 admin.site.register(License)
+admin.site.register(ProgrammingLanguage)
+admin.site.register(Project, ProjectAdmin)
+# admin.site.register(HostingPlatform)
