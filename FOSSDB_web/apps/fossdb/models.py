@@ -19,6 +19,15 @@ class ProgrammingLanguage(models.Model):
         return self.name
 
 
+class ProjectProgrammingLanguage(models.Model):
+    project = models.ForeignKey("Project", on_delete=models.CASCADE)
+    language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE)
+    percentage = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.project} | {self.language} | {self.percentage}%"
+
+
 class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, null=False)
