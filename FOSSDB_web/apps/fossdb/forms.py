@@ -1,29 +1,30 @@
-from django.forms import (CheckboxSelectMultiple, ModelForm,
-                          ModelMultipleChoiceField, TextInput)
+from django import forms
 
-from .models import License, Project
+from .models import License, Project, ProjectProgrammingLanguage
 
 
-class ProjectForm(ModelForm):
+class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ["title", "description", "license"]
+        fields = ["name", "description", "licenses", "programming_languages"]
 
         widgets = {
-            "title": TextInput(attrs={
+            "name": forms.TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Project name",
             }),
-            "description": TextInput(attrs={
+            "description": forms.Textarea(attrs={
                 "class": "form-control",
                 "placeholder": "Description",
             }),
+            "licenses": forms.CheckboxSelectMultiple(),
+            "programming_languages": forms.CheckboxSelectMultiple(),
         }
-    license = ModelMultipleChoiceField(queryset=License.objects.all(), widget=CheckboxSelectMultiple)
 
 
-class LicenseForm(ModelForm):
+class LicenseForm(forms.ModelForm):
     class Meta:
         model = License
         fields = ["short_name", "full_name", "url", "description"]
+
