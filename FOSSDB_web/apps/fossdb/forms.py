@@ -1,13 +1,14 @@
 from django import forms
 
-from .models import License, Project, ProjectProgrammingLanguage
+from .models import (License, ProgrammingLanguage, Project,
+                     ProjectProgrammingLanguage)
 
 
 class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        fields = ["name", "description", "licenses", "programming_languages"]
+        fields = ["name", "description", "licenses"]
 
         widgets = {
             "name": forms.TextInput(attrs={
@@ -19,7 +20,6 @@ class ProjectForm(forms.ModelForm):
                 "placeholder": "Description",
             }),
             "licenses": forms.CheckboxSelectMultiple(),
-            "programming_languages": forms.CheckboxSelectMultiple(),
         }
 
 
