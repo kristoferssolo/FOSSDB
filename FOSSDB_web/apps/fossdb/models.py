@@ -12,6 +12,13 @@ class License(models.Model):
         return self.short_name
 
 
+class ProgrammingLanguage(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
 class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=255, null=False)
