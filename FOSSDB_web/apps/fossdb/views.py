@@ -1,7 +1,8 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import redirect, render
 
-from .forms import ProjectForm, ProjectProgrammingLanguageFormSet
+from .forms import (ProjectForm, ProjectHostingPlatformFormSet,
+                    ProjectProgrammingLanguageFormSet)
 from .models import Project
 
 
@@ -19,8 +20,9 @@ def add_project(request):
     if request.method == "POST":
         project_form = ProjectForm(request.POST)
         language_formset = ProjectProgrammingLanguageFormSet(request.POST, instance=Project())
+        host_formset = ProjectHostingPlatformFormSet(request.POST, instance=Project())
 
-        if project_form.is_valid() and language_formset.is_valid():
+        if project_form.is_valid() and language_formset.is_valid() and host_formset.is_valid():
             project = project_form.save(commit=False)
             project.author = request.user
             project.save()
@@ -28,15 +30,20 @@ def add_project(request):
             language_formset.instance = project
             language_formset.save()
 
+            host_formset.instance = project
+            host_formset.save()
+
             project_form.save_m2m()
             return redirect("/")
     else:
         project_form = ProjectForm()
         language_formset = ProjectProgrammingLanguageFormSet()
+        host_formset = ProjectHostingPlatformFormSet()
 
     context = {
         "title": "Add project",
         "project_form": project_form,
-        "language_formset": language_formset
+        "language_formset": language_formset,
+        "host_formset": host_formset,
     }
     return render(request, "fossdb/add_project.html", context)
