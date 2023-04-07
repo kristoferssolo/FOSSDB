@@ -25,7 +25,7 @@
         </ul>
         <ul>
             {% for language in project.projectprogramminglanguage_set.all %}
-                <li>{{ language.language.name }} | {{ language.percentage }}&#37;</li>
+                <li>{{ language.language }} | {{ language.percentage }}&#37;</li>
             {% empty %}
                 <p>No language</p>
             {% endfor %}
