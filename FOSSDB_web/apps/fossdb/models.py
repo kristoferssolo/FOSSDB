@@ -32,8 +32,8 @@ class Project(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(max_length=255, null=False)
     description = models.TextField()
-    license = models.ManyToManyField(License)
-    create_date = models.DateTimeField(auto_now_add=True)
+    licenses = models.ManyToManyField(License)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.author} | {self.name}"
