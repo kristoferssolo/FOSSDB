@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from .models import (HostingPlatform, License, ProgrammingLanguage, Project,
-                     ProjectHostingPlatform, ProjectProgrammingLanguage)
+                     ProjectHostingPlatform, ProjectProgrammingLanguage, Tag)
 
 
 class ProjectProgrammingLanguageInline(admin.TabularInline):
@@ -29,3 +29,4 @@ admin.site.register(License)
 admin.site.register(ProgrammingLanguage)
 admin.site.register(HostingPlatform)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Tag)

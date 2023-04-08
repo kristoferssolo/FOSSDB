@@ -1,12 +1,14 @@
 import uuid
 
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.db import models
+
+User = settings.AUTH_USER_MODEL
 
 
 class License(models.Model):
     short_name = models.CharField(max_length=50)
-    full_name = models.CharField(max_length=100, null=True, blank=True)
+    full_name = models.CharField(max_length=100, blank=True)
     url = models.URLField(null=True, blank=True)
     description = models.TextField(null=True, blank=True)
 
@@ -24,7 +26,7 @@ class ProgrammingLanguage(models.Model):
 class ProjectProgrammingLanguage(models.Model):
     project = models.ForeignKey("Project", on_delete=models.CASCADE)
     language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE)
-    percentage = models.PositiveIntegerField()
+    percentage = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.project} | {self.language} | {self.percentage}%"
@@ -46,6 +48,12 @@ class ProjectHostingPlatform(models.Model):
         return f"{self.project} | {self.hosting_platform}"
 
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(null=True, blank=True)
+    icon = models.ImageField(upload_to="types/icons/", null=True, blank=True)
+
+
 class Project(models.Model):
     uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -54,6 +62,7 @@ class Project(models.Model):
     licenses = models.ManyToManyField(License)
     programming_languages = models.ManyToManyField(ProgrammingLanguage, through="ProjectProgrammingLanguage", related_name="projects")
     hosting_platform = models.ManyToManyField(HostingPlatform, through="ProjectHostingPlatform", related_name="projects")
+    project_type = models.ForeignKey(Tag, on_delete=models.CASCADE, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
