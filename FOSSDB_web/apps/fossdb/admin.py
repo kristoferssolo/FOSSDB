@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import (HostingPlatform, License, ProgrammingLanguage, Project,
+from .models import (HostingPlatform, ProgrammingLanguage, Project,
                      ProjectHostingPlatform, ProjectProgrammingLanguage)
 
 
@@ -25,7 +25,6 @@ class ProjectAdmin(admin.ModelAdmin):
         return " | ".join([i.hosting_platform.hosting_platform for i in object.projecthostingplatform_set.all()])
 
 
-admin.site.register(License)
 admin.site.register(ProgrammingLanguage)
 admin.site.register(HostingPlatform)
 admin.site.register(Project, ProjectAdmin)

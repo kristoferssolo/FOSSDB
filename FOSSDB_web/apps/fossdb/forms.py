@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import (HostingPlatform, License, ProgrammingLanguage, Project,
+from .models import (HostingPlatform, ProgrammingLanguage, Project,
                      ProjectHostingPlatform, ProjectProgrammingLanguage)
 
 
@@ -21,12 +21,6 @@ class ProjectForm(forms.ModelForm):
             }),
             "licenses": forms.CheckboxSelectMultiple(),
         }
-
-
-class LicenseForm(forms.ModelForm):
-    class Meta:
-        model = License
-        fields = ["short_name", "full_name", "url", "description"]
 
 
 class ProgrammingLanguageForm(forms.ModelForm):
