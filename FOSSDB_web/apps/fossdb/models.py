@@ -2,8 +2,9 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-
 from license.models import License
+
+User = settings.AUTH_USER_MODEL
 
 
 class ProgrammingLanguage(models.Model):
