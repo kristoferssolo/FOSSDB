@@ -1,3 +1,11 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import HostingPlatform, ProjectHostingPlatform
+
+
+class ProjectHostingPlatformInline(admin.TabularInline):
+    model = ProjectHostingPlatform
+    extra = 1
+
+
+admin.site.register(HostingPlatform)

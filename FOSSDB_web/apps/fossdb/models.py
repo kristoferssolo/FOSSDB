@@ -2,26 +2,11 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from hosting_platform.models import HostingPlatform
 from license.models import License
 from programming_language.models import ProgrammingLanguage
 
 User = settings.AUTH_USER_MODEL
-
-
-class HostingPlatform(models.Model):
-    hosting_platform = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.hosting_platform
-
-
-class ProjectHostingPlatform(models.Model):
-    project = models.ForeignKey("Project", on_delete=models.CASCADE)
-    hosting_platform = models.ForeignKey(HostingPlatform, on_delete=models.CASCADE)
-    url = models.URLField()
-
-    def __str__(self):
-        return f"{self.project} | {self.hosting_platform}"
 
 
 class Tag(models.Model):
