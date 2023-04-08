@@ -3,17 +3,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 
-User = settings.AUTH_USER_MODEL
-
-
-class License(models.Model):
-    short_name = models.CharField(max_length=50)
-    full_name = models.CharField(max_length=100, blank=True)
-    url = models.URLField(null=True, blank=True)
-    description = models.TextField(null=True, blank=True)
-
-    def __str__(self):
-        return self.short_name
+from license.models import License
 
 
 class ProgrammingLanguage(models.Model):
