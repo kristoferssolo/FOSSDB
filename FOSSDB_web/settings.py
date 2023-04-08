@@ -38,6 +38,7 @@ ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 INSTALLED_APPS = [
     "fossdb",
     "account",
+    "programming_language",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

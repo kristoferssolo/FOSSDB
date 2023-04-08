@@ -2,6 +2,7 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.db import models
+from programming_language.models import ProgrammingLanguage
 
 
 class License(models.Model):
@@ -12,22 +13,6 @@ class License(models.Model):
 
     def __str__(self):
         return self.short_name
-
-
-class ProgrammingLanguage(models.Model):
-    language = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.language
-
-
-class ProjectProgrammingLanguage(models.Model):
-    project = models.ForeignKey("Project", on_delete=models.CASCADE)
-    language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE)
-    percentage = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f"{self.project} | {self.language} | {self.percentage}%"
 
 
 class HostingPlatform(models.Model):

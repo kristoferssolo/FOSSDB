@@ -1,7 +1,6 @@
 from django import forms
 
-from .models import (HostingPlatform, License, ProgrammingLanguage, Project,
-                     ProjectHostingPlatform, ProjectProgrammingLanguage)
+from .models import HostingPlatform, License, Project, ProjectHostingPlatform
 
 
 class ProjectForm(forms.ModelForm):
@@ -27,23 +26,6 @@ class LicenseForm(forms.ModelForm):
     class Meta:
         model = License
         fields = ["short_name", "full_name", "url", "description"]
-
-
-class ProgrammingLanguageForm(forms.ModelForm):
-    percentage = forms.IntegerField(min_value=0, max_value=100)
-
-    class Meta:
-        model = ProgrammingLanguage
-        fields = ["language", "percentage"]
-
-
-ProjectProgrammingLanguageFormSet = forms.inlineformset_factory(
-    Project,
-    ProjectProgrammingLanguage,
-    form=ProgrammingLanguageForm,
-    extra=1,
-    can_delete=True,
-)
 
 
 class HostingPlatformForm(forms.ModelForm):
