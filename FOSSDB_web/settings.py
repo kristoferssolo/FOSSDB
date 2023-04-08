@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "account",
     "programming_language",
     "hosting_platform",
+    "tag",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
