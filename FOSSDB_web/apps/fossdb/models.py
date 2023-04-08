@@ -6,13 +6,9 @@ from hosting_platform.models import HostingPlatform
 from license.models import License
 from programming_language.models import ProgrammingLanguage
 
+from tag.models import Tag
+
 User = settings.AUTH_USER_MODEL
-
-
-class Tag(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(null=True, blank=True)
-    icon = models.ImageField(upload_to="types/icons/", null=True, blank=True)
 
 
 class Project(models.Model):
