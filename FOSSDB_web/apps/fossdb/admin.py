@@ -1,12 +1,7 @@
 from django.contrib import admin
+from programming_language.admin import ProjectProgrammingLanguageInline
 
-from .models import (HostingPlatform, ProgrammingLanguage, Project,
-                     ProjectHostingPlatform, ProjectProgrammingLanguage, Tag)
-
-
-class ProjectProgrammingLanguageInline(admin.TabularInline):
-    model = ProjectProgrammingLanguage
-    extra = 1
+from .models import HostingPlatform, License, Project, ProjectHostingPlatform
 
 
 class ProjectHostingPlatformInline(admin.TabularInline):

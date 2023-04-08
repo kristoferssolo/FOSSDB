@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "fossdb",
     "license",
     "account",
+    "programming_language",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

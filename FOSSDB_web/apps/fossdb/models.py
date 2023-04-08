@@ -3,24 +3,9 @@ import uuid
 from django.conf import settings
 from django.db import models
 from license.models import License
+from programming_language.models import ProgrammingLanguage
 
 User = settings.AUTH_USER_MODEL
-
-
-class ProgrammingLanguage(models.Model):
-    language = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.language
-
-
-class ProjectProgrammingLanguage(models.Model):
-    project = models.ForeignKey("Project", on_delete=models.CASCADE)
-    language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE)
-    percentage = models.PositiveIntegerField(default=0)
-
-    def __str__(self):
-        return f"{self.project} | {self.language} | {self.percentage}%"
 
 
 class HostingPlatform(models.Model):

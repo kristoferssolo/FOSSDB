@@ -1,7 +1,6 @@
 from django import forms
 
-from .models import (HostingPlatform, ProgrammingLanguage, Project,
-                     ProjectHostingPlatform, ProjectProgrammingLanguage)
+from .models import HostingPlatform, Project, ProjectHostingPlatform
 
 
 class ProjectForm(forms.ModelForm):
@@ -21,23 +20,6 @@ class ProjectForm(forms.ModelForm):
             }),
             "licenses": forms.CheckboxSelectMultiple(),
         }
-
-
-class ProgrammingLanguageForm(forms.ModelForm):
-    percentage = forms.IntegerField(min_value=0, max_value=100)
-
-    class Meta:
-        model = ProgrammingLanguage
-        fields = ["language", "percentage"]
-
-
-ProjectProgrammingLanguageFormSet = forms.inlineformset_factory(
-    Project,
-    ProjectProgrammingLanguage,
-    form=ProgrammingLanguageForm,
-    extra=1,
-    can_delete=True,
-)
 
 
 class HostingPlatformForm(forms.ModelForm):
