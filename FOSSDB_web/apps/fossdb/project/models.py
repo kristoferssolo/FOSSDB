@@ -2,10 +2,13 @@ import uuid
 
 from django.conf import settings
 from django.db import models
-from hosting_platform.models import HostingPlatform
-from license.models import License
-from programming_language.models import ProgrammingLanguage
-from tag.models import Tag
+
+from fossdb.hosting_platform.models import (HostingPlatform,
+                                            ProjectHostingPlatform)
+from fossdb.license.models import License
+from fossdb.programming_language.models import (ProgrammingLanguage,
+                                                ProjectProgrammingLanguage)
+from fossdb.tag.models import Tag
 
 User = settings.AUTH_USER_MODEL
 
@@ -16,8 +19,8 @@ class Project(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
     licenses = models.ManyToManyField(License)
-    programming_languages = models.ManyToManyField(ProgrammingLanguage, through="ProjectProgrammingLanguage", related_name="projects")
-    hosting_platform = models.ManyToManyField(HostingPlatform, through="ProjectHostingPlatform", related_name="projects")
+    programming_languages = models.ManyToManyField(ProgrammingLanguage, through=ProjectProgrammingLanguage, related_name="projects")
+    hosting_platform = models.ManyToManyField(HostingPlatform, through=ProjectHostingPlatform, related_name="projects")
     project_type = models.ForeignKey(Tag, on_delete=models.CASCADE, blank=True, null=True)
     date_created = models.DateTimeField(auto_now_add=True)
 

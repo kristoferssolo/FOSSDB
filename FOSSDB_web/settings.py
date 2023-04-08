@@ -36,12 +36,13 @@ ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 # Application definition
 
 INSTALLED_APPS = [
-    "fossdb",
-    "license",
     "account",
-    "programming_language",
-    "hosting_platform",
-    "tag",
+    "fossdb",
+    "fossdb.project",
+    "fossdb.license",
+    "fossdb.programming_language",
+    "fossdb.hosting_platform",
+    "fossdb.tag",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
