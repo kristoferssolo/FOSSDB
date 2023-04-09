@@ -3,6 +3,7 @@ import uuid
 from django.conf import settings
 from django.db import models
 
+from .language.models import ProgrammingLanguage
 from .license.models import License
 
 User = settings.AUTH_USER_MODEL
@@ -15,13 +16,6 @@ class HostingPlatform(models.Model):
         return self.hosting_platform
 
 
-class ProgrammingLanguage(models.Model):
-    language = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.language
-
-
 class Tag(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, default="")
@@ -29,15 +23,6 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class ProjectProgrammingLanguage(models.Model):
-    project = models.ForeignKey("Project", on_delete=models.CASCADE)
-    language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE)
-    percentage = models.PositiveIntegerField()
-
-    def __str__(self):
-        return f"{self.project} | {self.language} | {self.percentage}%"
 
 
 class ProjectHostingPlatform(models.Model):

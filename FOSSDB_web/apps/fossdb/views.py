@@ -1,8 +1,8 @@
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import redirect, render
 
-from .forms import (ProjectForm, ProjectHostingPlatformFormSet,
-                    ProjectProgrammingLanguageFormSet)
+from .forms import ProjectForm, ProjectHostingPlatformFormSet
+from .language.forms import ProjectProgrammingLanguageFormSet
 from .models import Project
 
 
