@@ -36,8 +36,8 @@ ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 # Application definition
 
 INSTALLED_APPS = [
-    "fossdb",
     "account",
+    "fossdb",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -82,7 +82,7 @@ WSGI_APPLICATION = "FOSSDB_web.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": f"django.db.backends.{config['DATABASE']['ENGINE']}",
         "NAME": config["DATABASE"]["NAME"],
         "USER": config["DATABASE"]["USER"],
         "PASSWORD": config["DATABASE"]["PASSWORD"],
@@ -128,6 +128,7 @@ USE_TZ = True
 
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_PATH.joinpath("static")
+MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_PATH.joinpath("media")
 
 # Default primary key field type
@@ -136,3 +137,14 @@ MEDIA_ROOT = BASE_PATH.joinpath("media")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+# HTTPS settings
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_SSL_REDIRECT = True
+
+# HSTS settings
+# SECURE_HSTS_SECONDS = 31536000  # 1 year
+# SECURE_HSTS_SECONDS = 1  # 1 year
+# SECURE_HSTS_PRELOAD = True
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True

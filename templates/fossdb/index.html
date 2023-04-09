@@ -3,10 +3,35 @@
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
+    <button >
+        <a href="{% url 'add-project' %}">Add Project</a>
+    </button>
+    <button >
+        <a href="/admin">Admin</a>
+    </button>
+    <br>
     {% for project in projects %}
         <b>@{{ project.author.username }}</b>
-        <h5>{{ project.title }}</h5>
+        <h4>{{ project.name }}</h4>
         <p>{{ project.description }}</p>
+        <ul>
+            {% for license in project.licenses.all %}
+                <li>
+                    <a href="{{ license.url }}">{{ license.short_name }}</a>
+                </li>
+            {% empty %}
+                <p>No license</p>
+            {% endfor %}
+        </ul>
+        <ul>
+            {% for language in project.projectprogramminglanguage_set.all %}
+                <li>{{ language.language }} | {{ language.percentage }}&#37;</li>
+            {% empty %}
+                <p>No language</p>
+            {% endfor %}
+        </ul>
+        <br>
+        <p>{{ project.date_created }}</p>
     {% empty %}
         <p>No projects yet (</p>
     {% endfor %}
