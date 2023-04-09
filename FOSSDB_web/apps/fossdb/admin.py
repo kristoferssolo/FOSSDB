@@ -1,8 +1,9 @@
 from django.contrib import admin
 
+from .host.models import HostingPlatform, ProjectHostingPlatform
 from .language.models import ProgrammingLanguage, ProjectProgrammingLanguage
 from .license.models import License
-from .models import HostingPlatform, Project, ProjectHostingPlatform, Tag
+from .models import Project, Tag
 
 
 class ProjectProgrammingLanguageInline(admin.TabularInline):

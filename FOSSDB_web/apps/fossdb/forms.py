@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import HostingPlatform, Project, ProjectHostingPlatform
+from .models import Project
 
 
 class ProjectForm(forms.ModelForm):
@@ -20,20 +20,3 @@ class ProjectForm(forms.ModelForm):
             }),
             "licenses": forms.CheckboxSelectMultiple(),
         }
-
-
-class HostingPlatformForm(forms.ModelForm):
-    url = forms.URLField()
-
-    class Meta:
-        model = HostingPlatform
-        fields = ["hosting_platform", "url"]
-
-
-ProjectHostingPlatformFormSet = forms.inlineformset_factory(
-    Project,
-    ProjectHostingPlatform,
-    form=HostingPlatformForm,
-    extra=1,
-    can_delete=False
-)
