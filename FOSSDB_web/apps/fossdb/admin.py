@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import (HostingPlatform, License, ProgrammingLanguage, Project,
+from .license.models import License
+from .models import (HostingPlatform, ProgrammingLanguage, Project,
                      ProjectHostingPlatform, ProjectProgrammingLanguage, Tag)
 
 

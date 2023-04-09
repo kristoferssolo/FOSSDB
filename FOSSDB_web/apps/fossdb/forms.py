@@ -23,12 +23,6 @@ class ProjectForm(forms.ModelForm):
         }
 
 
-class LicenseForm(forms.ModelForm):
-    class Meta:
-        model = License
-        fields = ["short_name", "full_name", "url", "description"]
-
-
 class ProgrammingLanguageForm(forms.ModelForm):
     percentage = forms.IntegerField(min_value=0, max_value=100)
 
