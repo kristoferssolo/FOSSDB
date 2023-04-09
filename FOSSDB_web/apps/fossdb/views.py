@@ -15,7 +15,7 @@ def index(request):
 
 
 @login_required(login_url="login/")
-@permission_required("fossdb.add_post", login_url="login/", raise_exception=True)
+@permission_required("fossdb.add_project", login_url="login/", raise_exception=True)
 def add_project(request):
     if request.method == "POST":
         project_form = ProjectForm(request.POST)

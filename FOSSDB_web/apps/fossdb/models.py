@@ -35,6 +35,9 @@ class Tag(models.Model):
     description = models.TextField(blank=True, default="")
     icon = models.ImageField(upload_to="types/icons/", null=True, blank=True)
 
+    def __str__(self):
+        return self.name
+
 
 class ProjectProgrammingLanguage(models.Model):
     project = models.ForeignKey("Project", on_delete=models.CASCADE)
@@ -62,7 +65,7 @@ class Project(models.Model):
     licenses = models.ManyToManyField(License)
     programming_languages = models.ManyToManyField(ProgrammingLanguage, through="ProjectProgrammingLanguage", related_name="projects")
     hosting_platform = models.ManyToManyField(HostingPlatform, through="ProjectHostingPlatform", related_name="projects")
-    project_type = models.ForeignKey(Tag, on_delete=models.CASCADE, blank=True, null=True)
+    tag = models.ManyToManyField(Tag)
     date_created = models.DateTimeField(auto_now_add=True)
 
     def save(self, *args, **kwargs):
