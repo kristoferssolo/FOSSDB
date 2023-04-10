@@ -1,7 +1,7 @@
 # FOSSDB
 
-[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-![Tests](https://github.com/kristoferssolo/FOSSDB-Web/actions/workflows/test.yml/badge.svg)
+![Tests](https://github.com/kristoferssolo/FOSSDB-Web/actions/workflows/test.yml/badge.svg)  
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 
 
 FOSSDB is an open-source web application that helps users find, contribute, and collaborate on free and open-source software (FOSS) projects.
@@ -33,7 +33,7 @@ python manage.py runserver
 ```
 
 ## Usage
-After following the installation steps, you can access the application at [https://localhost:8000](https://localhost:8000).
+After following the installation steps, you can access the application at [localhost:8000](localhost:8000).
 Here are some of the features:
 - Browse projects by programming language, license, or search term
 - View project details, including programming languages, licenses, and descriptions
