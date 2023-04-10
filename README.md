@@ -33,7 +33,7 @@ python manage.py runserver
 ```
 
 ## Usage
-After following the installation steps, you can access the application at [localhost:8000](localhost:8000).
+After following the installation steps, you can access the application at [localhost:8000](http://localhost:8000).
 Here are some of the features:
 - Browse projects by programming language, license, or search term
 - View project details, including programming languages, licenses, and descriptions
