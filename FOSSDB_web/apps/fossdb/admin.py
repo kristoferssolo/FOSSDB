@@ -1,4 +1,4 @@
-# from django.contrib import admin
+from django.contrib import admin
 
 from .host.models import HostingPlatform, ProjectHostingPlatform
 from .language.models import ProgrammingLanguage, ProjectProgrammingLanguage

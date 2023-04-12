@@ -1,7 +1,8 @@
 # FOSSDB
 
-[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
-![Tests](https://github.com/kristoferssolo/FOSSDB-Web/actions/workflows/test.yml/badge.svg)
+[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
+![Tests](https://github.com/kristoferssolo/FOSSDB-Web/actions/workflows/test.yml/badge.svg)  
+![Lint](https://github.com/kristoferssolo/FOSSDB-Web/actions/workflows/lint.yml/badge.svg)  
 
 
 FOSSDB is an open-source web application that helps users find, contribute, and collaborate on free and open-source software (FOSS) projects.
