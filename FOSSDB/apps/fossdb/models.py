@@ -10,7 +10,7 @@ from .operating_system.models import OperatingSystem
 from .star.models import Star
 from .tag.models import Tag
 
-User = settings.AUTH_USER_MODEL
+ser = settings.AUTH_USER_MODEL
 
 
 class Project(models.Model):
