@@ -1,0 +1,13 @@
+{
+    "DEBUG": false,
+    "SECRET_KEY": "",
+    "ALLOWED_HOSTS": [""],
+    "DATABASE": {
+        "ENGINE": "",
+        "NAME": "",
+        "USER": "",
+        "PASSWORD": "",
+        "HOST": "",
+        "PORT": ""
+    }
+}
