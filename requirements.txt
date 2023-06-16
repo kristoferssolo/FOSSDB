@@ -1,4 +1,4 @@
-Django==4.1.7
-Pillow==9.4.0
-fontawesomefree==6.2.1
+Django==4.2.2
+Pillow==9.5.0
+fontawesomefree==6.4.0
 mysqlclient==2.1.1
