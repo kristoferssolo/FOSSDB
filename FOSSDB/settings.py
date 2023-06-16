@@ -19,9 +19,6 @@ BASE_PATH = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(BASE_PATH.joinpath("FOSSDB", "apps")))
 
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = BASE_PATH.joinpath("debug").is_file()
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 with open(BASE_PATH.joinpath("config.json"), "r", encoding="UTF-8") as config_file:
@@ -32,6 +29,8 @@ SECRET_KEY = config["SECRET_KEY"]
 
 ALLOWED_HOSTS = config["ALLOWED_HOSTS"]
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config["DEBUG"]
 
 # Application definition
 
