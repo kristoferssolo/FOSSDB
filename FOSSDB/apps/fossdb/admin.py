@@ -13,9 +13,14 @@ class ProjectProgrammingLanguageInline(admin.TabularInline):
     extra = 1
 
 
+class ProjectHostingPlatformInline(admin.TabularInline):
+    model = ProjectHostingPlatform
+    extra = 1
+
+
 class ProjectAdmin(admin.ModelAdmin):
-    inlines = [ProjectProgrammingLanguageInline]
-    list_display = ("name", "author", "_languages", "hosting_platform")
+    inlines = [ProjectHostingPlatformInline, ProjectProgrammingLanguageInline]
+    list_display = ("name", "author", "_languages")
 
     def _languages(self, object):
         return " | ".join(
@@ -25,7 +30,6 @@ class ProjectAdmin(admin.ModelAdmin):
 
 models = (
     HostingPlatform,
-    # ProjectHostingPlatform,  # WARNING: remove this
     License,
     ProgrammingLanguage,
     Tag,

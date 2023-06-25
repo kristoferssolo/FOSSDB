@@ -3,7 +3,6 @@ import uuid
 from django.conf import settings
 from django.db import models
 
-from .hosting_platform.models import ProjectHostingPlatform
 from .license.models import License
 from .operating_system.models import OperatingSystemVersion
 from .programming_language.models import ProgrammingLanguage
@@ -21,11 +20,7 @@ class Project(models.Model):
     programming_language = models.ManyToManyField(
         ProgrammingLanguage,
         through="ProjectProgrammingLanguage",
-        related_name="projects",
         blank=True,
-    )
-    hosting_platform = models.ForeignKey(
-        ProjectHostingPlatform, on_delete=models.CASCADE
     )
     tag = models.ManyToManyField(Tag, blank=True)
     operating_system = models.ManyToManyField(OperatingSystemVersion, blank=True)
