@@ -11,26 +11,12 @@
     </button>
     <br>
     {% for project in projects %}
-        <b>@{{ project.author.username }}</b>
+        <b>@{{ project.owner }}</b>
         <h4>{{ project.name }}</h4>
-        <p>{{ project.description }}</p>
-        <ul>
-            {% for license in project.licenses.all %}
-                <li>
-                    <a href="{{ license.url }}">{{ license.short_name }}</a>
-                </li>
-            {% empty %}
-                <p>No license</p>
-            {% endfor %}
-        </ul>
-        <ul>
-            {% for language in project.projectprogramminglanguage_set.all %}
-                <li>{{ language.language }} | {{ language.percentage }}&#37;</li>
-            {% empty %}
-                <p>No language</p>
-            {% endfor %}
-        </ul>
         <br>
+        <a href="{{ project.get_absolute_url }}">
+            <button>Read more</button>
+        </a>
         <p>{{ project.date_created }}</p>
     {% empty %}
         <p>No projects yet (</p>
