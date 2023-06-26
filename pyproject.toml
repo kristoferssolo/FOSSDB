@@ -15,6 +15,21 @@ warn_unused_configs = true
 [tool.ruff]
 line-length = 160
 
+[tool.black]
+line-length = 160
 
 [tool.ruff.flake8-quotes]
 docstring-quotes = "double"
+
+[tool.djlint]
+close_void_tags = true
+format_attribute_template_tags = true
+format_css = true
+format_js = true
+max_line_length = 120
+
+[tool.djlint.css]
+indent_size = 4
+
+[tool.djlint.js]
+indent_size = 4
