@@ -23,9 +23,7 @@ class ProjectAdmin(admin.ModelAdmin):
     list_display = ("name", "author", "_languages")
 
     def _languages(self, object):
-        return " | ".join(
-            [i.language.name for i in object.projectprogramminglanguage_set.all()]
-        )
+        return " | ".join([i.programming_language.name for i in object.projectprogramminglanguage_set.all()])
 
 
 models = (

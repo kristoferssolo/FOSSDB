@@ -4,7 +4,6 @@ from .models import Project
 
 
 class ProjectForm(forms.ModelForm):
-
     class Meta:
         model = Project
         fields = (
@@ -14,8 +13,6 @@ class ProjectForm(forms.ModelForm):
             "tag",
             "operating_system",
         )
-
-        exclude = ("programming_language",)
 
         widgets = {
             "name": forms.TextInput(

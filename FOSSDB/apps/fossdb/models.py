@@ -5,23 +5,17 @@ from django.db import models
 
 from .license.models import License
 from .operating_system.models import OperatingSystemVersion
-from .programming_language.models import ProgrammingLanguage
 from .tag.models import Tag
 
 User = settings.AUTH_USER_MODEL
 
 
 class Project(models.Model):
-    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID")
     author = models.ForeignKey(User, on_delete=models.CASCADE, db_index=True)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
     license = models.ManyToManyField(License, blank=True)
-    programming_language = models.ManyToManyField(
-        ProgrammingLanguage,
-        through="ProjectProgrammingLanguage",
-        blank=True,
-    )
     tag = models.ManyToManyField(Tag, blank=True)
     operating_system = models.ManyToManyField(OperatingSystemVersion, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
