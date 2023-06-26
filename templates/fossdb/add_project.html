@@ -5,8 +5,8 @@
 {% block content %}
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        {{ host_form.as_p }}
+        {{ project_form.as_p }}
+        {{ hosting_platform_form.as_table }}
         <button type="submit">Submit</button>
     </form>
 {% endblock %}

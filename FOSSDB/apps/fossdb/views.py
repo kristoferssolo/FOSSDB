@@ -12,29 +12,28 @@ from .models import Project
 @permission_required("fossdb.add_project", login_url="login/", raise_exception=True)
 def add_project(request):
     project_form = ProjectForm(request.POST or None)
-    hosting_platform_form = ProjectHostingPlatformForm(request.POST or None)
+    hosting_platform_form = HostingPlatformForm(request.POST or None)
+
+    _forms: dict[str, forms.ModelForm] = {
+        "project_form": project_form,
+        "hosting_platform_form": hosting_platform_form,
+    }
 
     if request.method == "POST":
-        if project_form.is_valid() and hosting_platform_form.is_valid():
+        if all([form.is_valid() for form in _forms.values()]):
             project = project_form.save(commit=False)
             project.author = request.user
             project.save()
 
-            project_hosting_platform = ProjectHostingPlatform(
-                hosting_platform=hosting_platform_form.cleaned_data["hosting_platform"],
-                project=project,
-                url=hosting_platform_form.cleaned_data["url"],
-            )
-            project_hosting_platform.save()
+            hosting_platform = hosting_platform_form.save(commit=False)
+            hosting_platform.project = project
+            hosting_platform.save()
+
 
             project_form.save_m2m()
             return redirect("index")
 
-    context = {
-        "title": "Add project",
-        "form": project_form,
-        "host_form": hosting_platform_form,
-    }
+    context = {"title": "Add project", **_forms}
     return render(request, "fossdb/add_project.html", context)
 
 

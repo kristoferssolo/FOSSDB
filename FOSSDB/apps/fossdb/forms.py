@@ -1,7 +1,5 @@
 from django import forms
 
-from .hosting_platform.models import HostingPlatform
-
 from .models import Project
 
 
