@@ -37,6 +37,7 @@ def add_project(request):
             programming_language.project = project
             programming_language.save()
 
+            project.save_m2m()
             return redirect("index")
 
     context = {"title": "Add project", **_forms}
