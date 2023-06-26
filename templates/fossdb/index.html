@@ -3,17 +3,17 @@
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
-    <button >
+    <button>
         <a href="{% url 'add-project' %}">Add Project</a>
     </button>
-    <button >
+    <button>
         <a href="/admin">Admin</a>
     </button>
-    <br>
+    <br />
     {% for project in projects %}
         <b>@{{ project.owner }}</b>
         <h4>{{ project.name }}</h4>
-        <br>
+        <br />
         <a href="{{ project.get_absolute_url }}">
             <button>Read more</button>
         </a>
