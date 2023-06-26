@@ -1,12 +1,17 @@
 from django import forms
+from django.conf import settings
 from django.contrib.auth.decorators import login_required, permission_required
-from django.shortcuts import redirect, render
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from .forms import ProjectForm
 from .hosting_platform.forms import HostingPlatformForm
 from .models import Project
 from .programming_language.forms import ProgrammingLanguageForm
+
+User = settings.AUTH_USER_MODEL
 
 
 @login_required(login_url="login/")
@@ -52,8 +57,15 @@ def index(request):
     return render(request, "fossdb/index.html", context)
 
 
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = "fossdb/detailed_view.html"
+    context_object_name = "project"
+    slug_field = "name"
+    slug_url_kwarg = "project_name"
 
-
-
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(owner__username=self.kwargs.get("username"))
 
 

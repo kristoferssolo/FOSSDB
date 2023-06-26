@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}{{ project.name }}{% endblock %}
+{% block meta %}{% endblock %}
+{% block content %}
+    <h2>@{{ project.owner.username }}</h2>
+    <p>{{ project.name }}</p>
+    <p>{{ project.description }}</p>
+    <ul>
+        {% for license in project.licenses.all %}
+            <li>
+                <a href="{{ license.url }}">{{ license.short_name }}</a>
+            </li>
+        {% empty %}
+            <p>No license</p>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for language in project.projectprogramminglanguage_set.all %}
+            <li>{{ language.language }} | {{ language.percentage }}&#37;</li>
+        {% empty %}
+            <p>No language</p>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for tag in project.tag.all %}
+            <li>{{ tag.name }}</li>
+        {% empty %}
+        {% endfor %}
+    </ul>
+    <p>{{ project.date_created|date:"d.m.Y, G:i" }}</p>
+    <button>
+        <a href="{% url 'project-update' project.owner project.name %}">Update</a>
+    </button>
+    <button>
+        <a href="{% url 'project-delete' project.owner project.name %}">Delete</a>
+    </button>
+{% endblock %}
