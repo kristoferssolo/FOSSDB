@@ -4,7 +4,8 @@
 {% block meta %}{% endblock %}
 {% block content %}
     <form method="post">
-        {% csrf_token %}{{ form }}
+        {% csrf_token %}
+        {{ form.as_p }}
         <p>
             Don't have an account? Create one <a href="{% url 'signup' %}">Here</a>!
         </p>
