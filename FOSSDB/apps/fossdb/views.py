@@ -88,3 +88,16 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.get_object().owner == self.request.user
 
 
+class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Project
+    template_name = "fossdb/delete_view.html"
+    slug_field = "name"
+    slug_url_kwarg = "project_name"
+    success_url = reverse_lazy("index")
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(owner__username=self.kwargs.get("username"))
+
+    def test_func(self):
+        return self.get_object().owner == self.request.user
