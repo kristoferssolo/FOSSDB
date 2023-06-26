@@ -1,6 +1,5 @@
 # FOSSDB
 
-[![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)  
 ![Django Test](https://github.com/kristoferssolo/FOSSDB/actions/workflows/test.yml/badge.svg)  
 ![Ruff](https://github.com/kristoferssolo/FOSSDB/actions/workflows/ruff.yml/badge.svg)  
 
