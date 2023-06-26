@@ -69,3 +69,22 @@ class ProjectDetailView(DetailView):
         return queryset.filter(owner__username=self.kwargs.get("username"))
 
 
+class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Project
+    template_name = "fossdb/update_view.html"
+    form_class = (
+        ProjectForm,
+        HostingPlatformForm,
+        ProgrammingLanguageForm,
+    )
+    slug_field = "name"
+    slug_url_kwarg = "project_name"
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        return queryset.filter(owner__username=self.kwargs.get("username"))
+
+    def test_func(self):
+        return self.get_object().owner == self.request.user
+
+
