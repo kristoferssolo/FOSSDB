@@ -7,25 +7,33 @@
     <p>{{ project.name }}</p>
     <p>{{ project.description }}</p>
     <ul>
-        {% for license in project.licenses.all %}
+        {% for license in project.license.all %}
             <li>
-                <a href="{{ license.url }}">{{ license.short_name }}</a>
+                <a href="{{ license.url }}">{{ license }}</a>
             </li>
         {% empty %}
             <p>No license</p>
         {% endfor %}
     </ul>
     <ul>
-        {% for language in project.projectprogramminglanguage_set.all %}
-            <li>{{ language.language }} | {{ language.percentage }}&#37;</li>
+        {% for language in project.programming_language.all %}
+            <li>{{ language }}&#37;</li>
         {% empty %}
             <p>No language</p>
         {% endfor %}
     </ul>
     <ul>
-        {% for tag in project.tag.all %}
-            <li>{{ tag.name }}</li>
+        {% for os in project.oprating_system.all %}
+            <li>{{ os.version }}</li>
         {% empty %}
+            <p>No OS</p>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for tag in project.tag.all %}
+            <li>{{ tag }}</li>
+        {% empty %}
+            <p>No tag</p>
         {% endfor %}
     </ul>
     <p>{{ project.date_created|date:"d.m.Y, G:i" }}</p>
