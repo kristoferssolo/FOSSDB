@@ -24,8 +24,7 @@ class Project(models.Model):
     def star_amount(self):
         return self.star.count()
 
-    @property
-    def absolute_url(self):
+    def get_absolute_url(self):
         return f"/{self.owner}/{self.name}"
 
     def __str__(self):
