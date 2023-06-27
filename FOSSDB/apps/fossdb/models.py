@@ -5,6 +5,7 @@ from django.db import models
 
 from .license.models import License
 from .operating_system.models import OperatingSystemVersion
+from .programming_language.models import ProgrammingLanguage, ProjectProgrammingLanguage
 from .tag.models import Tag
 
 User = settings.AUTH_USER_MODEL
@@ -18,6 +19,7 @@ class Project(models.Model):
     license = models.ManyToManyField(License, blank=True)
     tag = models.ManyToManyField(Tag, blank=True)
     operating_system = models.ManyToManyField(OperatingSystemVersion, blank=True)
+    programming_language = models.ManyToManyField(ProgrammingLanguage, through=ProjectProgrammingLanguage, blank=True)
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property

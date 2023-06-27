@@ -1,15 +1,12 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from .forms import ProjectForm
 from .hosting_platform.forms import HostingPlatformForm
-from .hosting_platform.models import ProjectHostingPlatform
 from .models import Project
 from .programming_language.forms import ProgrammingLanguageForm
-from .programming_language.models import ProjectProgrammingLanguage
 
 
 def index(request):
@@ -64,10 +61,6 @@ class ProjectDetailView(DetailView):
     slug_field = "name"
     slug_url_kwarg = "project_name"
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(owner__username=self.kwargs.get("username"))
-
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
@@ -77,10 +70,6 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     slug_url_kwarg = "project_name"
     login_url = "/login/"
     redirect_field_name = "redirect_to"
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(owner__username=self.kwargs.get("username"))
 
     def test_func(self):
         return self.get_object().owner == self.request.user
@@ -110,10 +99,6 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     login_url = "/login/"
     redirect_field_name = "redirect_to"
     success_url = "/"
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        return queryset.filter(owner__username=self.kwargs.get("username"))
 
     def test_func(self):
         return self.get_object().owner == self.request.user
