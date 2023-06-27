@@ -5,6 +5,7 @@ from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from .forms import ProjectForm
 from .hosting_platform.forms import HostingPlatformForm
+
 from .models import Project
 from .programming_language.forms import ProgrammingLanguageForm
 

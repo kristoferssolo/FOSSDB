@@ -22,7 +22,7 @@ def signup_view(request):
         "title": "Sign Up",
         "form": form,
     }
-    return render(request, "registration/signup.html", context)
+    return render(request, "account/signup.html", context)
 
 
 def login_view(request):
@@ -37,4 +37,4 @@ def login_view(request):
         "title": "Login",
         "form": form,
     }
-    return render(request, "registration/login.html", context)
+    return render(request, "account/login.html", context)
