@@ -14,7 +14,7 @@ def get_profile_pic_path(instance, filename) -> Path:
 
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID")
-    profile_picture = models.ImageField(upload_to=get_profile_pic_path, default=Path("profile_pic", "default.jpg"))
+    profile_picture = models.ImageField(upload_to=get_profile_pic_path, default=Path("profile_pics", "default.jpg"))
 
     @property
     def full_name(self):
