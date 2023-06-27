@@ -1,7 +1,5 @@
 from django.db import models
 
-from fossdb.models import Project
-
 
 class HostingPlatform(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -12,7 +10,7 @@ class HostingPlatform(models.Model):
 
 class ProjectHostingPlatform(models.Model):
     hosting_platform = models.ForeignKey(HostingPlatform, on_delete=models.CASCADE)
-    project = models.OneToOneField(Project, on_delete=models.CASCADE)
+    project = models.OneToOneField("Project", on_delete=models.CASCADE)
     url = models.URLField(unique=True)
 
     def __str__(self):

@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 {% load static %}
-{% block title %}{{ project.name }}{% endblock %}
+{% block title %}{{ project.owner }}/{{ project.name }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
-    <h2>@{{ project.owner.username }}</h2>
-    <p>{{ project.name }}</p>
+    <h2>@{{ project.owner }}</h2>
+    <h3>{{ project.name }}</h3>
     <p>{{ project.description }}</p>
+    <p>
+        <a href="{{ project.projecthostingplatform.url }}" target="_blank">{{ project.projecthostingplatform.hosting_platform }}</a>
+    </p>
     <ul>
         {% for license in project.license.all %}
             <li>
@@ -16,15 +19,8 @@
         {% endfor %}
     </ul>
     <ul>
-        {% for language in project.programming_language.all %}
-            <li>{{ language }}&#37;</li>
-        {% empty %}
-            <p>No language</p>
-        {% endfor %}
-    </ul>
-    <ul>
-        {% for os in project.oprating_system.all %}
-            <li>{{ os.version }}</li>
+        {% for os in project.operating_system.all %}
+            <li>{{ os }}</li>
         {% empty %}
             <p>No OS</p>
         {% endfor %}
@@ -34,6 +30,13 @@
             <li>{{ tag }}</li>
         {% empty %}
             <p>No tag</p>
+        {% endfor %}
+    </ul>
+    <ul>
+        {% for language in project.projectprogramminglanguage_set.all %}
+            <li>{{ language.programming_language }} {{ language.percentage }}&#37;</li>
+        {% empty %}
+            <p>No language</p>
         {% endfor %}
     </ul>
     <p>{{ project.date_created|date:"d.m.Y, G:i" }}</p>

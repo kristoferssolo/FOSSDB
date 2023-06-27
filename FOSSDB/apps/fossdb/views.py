@@ -1,12 +1,15 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db import transaction
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
 from .forms import ProjectForm
 from .hosting_platform.forms import HostingPlatformForm
+from .hosting_platform.models import ProjectHostingPlatform
 from .models import Project
 from .programming_language.forms import ProgrammingLanguageForm
+from .programming_language.models import ProjectProgrammingLanguage
 
 
 def index(request):
@@ -25,21 +28,23 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     redirect_field_name = "redirect_to"
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user
-        response = super().form_valid(form)
+        response = None
+        with transaction.atomic():
+            form.instance.owner = self.request.user
+            response = super().form_valid(form)
 
-        hosting_platform_form = HostingPlatformForm(self.request.POST, instance=self.object)
-        if hosting_platform_form.is_valid():
-            hosting_platform = hosting_platform_form.save(commit=False)
-            hosting_platform.project = self.object
-            hosting_platform.save()
+            hosting_platform_form = HostingPlatformForm(self.request.POST, instance=self.object)
+            if hosting_platform_form.is_valid():
+                hosting_platform = hosting_platform_form.save(commit=False)
+                hosting_platform.project = self.object
+                hosting_platform.save()
 
-        # TODO: allow adding multiple languages
-        programming_language_form = ProgrammingLanguageForm(self.request.POST, instance=self.object)
-        if programming_language_form.is_valid():
-            programming_language = programming_language_form.save(commit=False)
-            programming_language.project = self.object
-            programming_language.save()
+            # TODO: allow adding multiple languages
+            programming_language_form = ProgrammingLanguageForm(self.request.POST, instance=self.object)
+            if programming_language_form.is_valid():
+                programming_language = programming_language_form.save(commit=False)
+                programming_language.project = self.object
+                programming_language.save()
 
         return response
 
@@ -72,25 +77,6 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     slug_url_kwarg = "project_name"
     login_url = "/login/"
     redirect_field_name = "redirect_to"
-
-    def form_valid(self, form):
-        form.instance.owner = self.request.user
-        response = super().form_valid(form)
-
-        hosting_platform_form = HostingPlatformForm(self.request.POST, instance=self.object)
-        if hosting_platform_form.is_valid():
-            hosting_platform = hosting_platform_form.save(commit=False)
-            hosting_platform.project = self.object
-            hosting_platform.save()
-
-        # TODO: allow adding multiple languages
-        programming_language_form = ProgrammingLanguageForm(self.request.POST, instance=self.object)
-        if programming_language_form.is_valid():
-            programming_language = programming_language_form.save(commit=False)
-            programming_language.project = self.object
-            programming_language.save()
-
-        return response
 
     def get_queryset(self):
         queryset = super().get_queryset()
