@@ -1,6 +1,6 @@
 import uuid
 
-from django.contrib.auth.models import User
+from django.conf import settings
 
 from django.db import models
 
@@ -12,7 +12,7 @@ from .tag.models import Tag
 
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID")
-    owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, default="")
     license = models.ManyToManyField(License, blank=True)

@@ -1,8 +1,19 @@
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from .forms import SignUpForm
+from .models import User
+
+
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+
+    context = {
+        "title": user.username + ("" if not user.full_name else f" ({user.full_name})"),
+        "user": user,
+    }
+    return render(request, "account/profile.html", context)
 
 
 def signup_view(request):
