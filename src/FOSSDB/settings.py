@@ -15,13 +15,13 @@ import sys
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
-BASE_PATH = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(BASE_PATH.joinpath("FOSSDB", "apps")))
+BASE_DIR = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(BASE_DIR / "apps"))
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-with open(BASE_PATH.parent / "config.json", "r", encoding="UTF-8") as config_file:
+with open(BASE_DIR.parent / "config.json", "r", encoding="UTF-8") as config_file:
     config = json.load(config_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     "account",
     "fossdb",
     "django_filters",
+    "fontawesomefree",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -62,7 +63,7 @@ TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
-            BASE_PATH / "templates",
+            BASE_DIR / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -130,17 +131,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILE_DIRS = [
-    BASE_PATH / "static",
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
 ]
-STATIC_ROOT = BASE_PATH.parent / "local-cdn" / "static"
+STATIC_ROOT = BASE_DIR.parent / "local-cdn" / "static"
 
 MEDIA_URL = "media/"
 MEDIAFILES_DIRS = [
-    BASE_PATH / "media",
+    BASE_DIR / "media",
 ]
-MEDIA_ROOT = BASE_PATH.parent / "local-cdn" / "media"
+MEDIA_ROOT = BASE_DIR.parent / "local-cdn" / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

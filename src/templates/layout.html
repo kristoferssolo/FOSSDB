@@ -1,15 +1,65 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-color-mode="dark">
+<html lang="en" data-theme="dark">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="{% static 'css/fossdb-ui.css' %}" />
+        <link href="{% static 'fontawesomefree/css/all.min.css' %}"
+              rel="stylesheet" />
         <title>
             {% block title %}{% endblock %}
         </title>
         {% block meta %}{% endblock %}
     </head>
-    <body>
-        {% block content %}{% endblock %}
+    <body class="text-lightsteelblue-100 bg-gray-100 flex flex-col min-h-screen font-roboto">
+        <header class="flex justify-between items-center px-6 py-2 font-abel text-xl">
+            <div class="flex justify-between">
+                <!-- logo -->
+                <div class="flex items-center text-4xl font-abel">
+                    <img class=""
+                         width="40"
+                         src="{% static 'img/icons/logo.svg' %}"
+                         alt="logo" />
+                    <a class="hover:text-skyblue transform duration-300 ease-in-out" href="">foss<span class="text-skyblue">db</span></a>
+                </div>
+                <!-- search -->
+                <div class="relative items-center flex">
+                    <input type="text"
+                           placeholder="Search projects..."
+                           class="py-2 mx-4 placeholder-lightsteelblue-300 focus:outline-none bg-gray-100 border border-b-lightsteelblue-100 hover:border-b-2 transform duration-200 ease-in-out focus:border-b-skyblue focus:border-b-2 max-w-[10rem]" />
+                </div>
+                <!-- navbar -->
+                <nav class="uppercase flex gap-x-6 items-center">
+                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">explore</a>
+                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">contribute</a>
+                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">news</a>
+                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">dashboard</a>
+                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">help</a>
+                </nav>
+            </div>
+            <div class="">
+                <a href="" class=""><i class="fa-solid fa-globe fa-lg"></i></a>
+                <a href=""
+                   class="hover:text-skyblue transition duration-300 ease-in-out"><i class="fa-solid fa-user fa-lg ml-4"></i></a>
+            </div>
+        </header>
+        <main class="flex-grow">
+        </main>
+        <footer class="h-32 flex items-center text-slategray bg-gray-200 mb-1 mt-4 font-condensed">
+            <div class="p-8">
+                <div class="space-y-4 text-left">
+                    <p>
+                        FOSSDB is a passion project of <a class="underline"
+    href="https://github.com/kristoferssolo"
+    target="_blank">@kristoferssolo</a> and a dedicated community of reporters.
+                    </p>
+                    <!-- TODO: finish these sentences -->
+                    <p>This site uses data from GitHub as well as data...</p>
+                    <p>This site has no affiliation with GitHub or any other hosting platform.</p>
+                </div>
+                <div></div>
+            </div>
+        </footer>
     </body>
 </html>
