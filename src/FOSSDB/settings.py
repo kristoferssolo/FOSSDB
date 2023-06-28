@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "django_filters",
     "tailwind",
     "tokyonight_night",
+    "crispy_forms",
     "django_browser_reload",
     "fontawesomefree",
     "django.contrib.admin",

@@ -22,15 +22,12 @@ def signup_view(request):
         if form.is_valid():
             user = form.save()
             raw_password = form.cleaned_data.get("password1")
-            user = authenticate(
-                username=user.username,
-                password=raw_password,
-            )
+            user = authenticate(username=user.username, password=raw_password)
             login(request, user)
-            return redirect("index")
+            return redirect("homepage")
 
     context = {
-        "title": "Sign Up",
+        "title": "FOSSDB | SignUp",
         "form": form,
     }
     return render(request, "signup.html", context)
@@ -42,10 +39,10 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect("index")
+            return redirect("homepage")
 
     context = {
-        "title": "Login",
+        "title": "FOSSDB | Login",
         "form": form,
     }
     return render(request, "login.html", context)

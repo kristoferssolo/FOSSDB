@@ -14,3 +14,17 @@ body {
 ::after {
     border-width: 0;
 }
+
+.border-gradient-horizontal {
+    position: relative;
+}
+
+.border-gradient-horizontal::before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    height: 0.25rem;
+    background: linear-gradient(to right, transparent, #27a1b9, transparent);
+    transform: translateY(-50%);
+}
