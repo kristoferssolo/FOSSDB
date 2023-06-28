@@ -20,7 +20,7 @@ ProgrammingLanguageInlineFormset = inlineformset_factory(
 
 class ProjectListView(FilterView):
     model = Project
-    template_name = "fossdb/explore.html"
+    template_name = "explore.html"
     filterset_class = ProjectFilter
     context_object_name = "projects"
     paginate_by = 10  # optional 10 projects a page
@@ -29,7 +29,7 @@ class ProjectListView(FilterView):
 class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     form_class = ProjectForm
-    template_name = "fossdb/create_view.html"
+    template_name = "create_view.html"
     login_url = "/login/"
     redirect_field_name = "redirect_to"
 
@@ -63,7 +63,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
 class ProjectDetailView(DetailView):
     model = Project
-    template_name = "fossdb/detailed_view.html"
+    template_name = "detailed_view.html"
     context_object_name = "project"
     slug_field = "name"
     slug_url_kwarg = "project_name"
@@ -71,7 +71,7 @@ class ProjectDetailView(DetailView):
 
 class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Project
-    template_name = "fossdb/create_view.html"
+    template_name = "create_view.html"
     form_class = ProjectForm
     slug_field = "name"
     slug_url_kwarg = "project_name"
@@ -94,7 +94,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Project
-    template_name = "fossdb/delete_view.html"
+    template_name = "delete_view.html"
     slug_field = "name"
     slug_url_kwarg = "project_name"
     login_url = "/login/"

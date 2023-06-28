@@ -2,20 +2,20 @@ from django.shortcuts import render
 
 
 def homepage(request):
-    return render(request, "main/homepage.html", {"title": "FOSSDB"})
+    return render(request, "homepage.html", {"title": "FOSSDB"})
 
 
 def contribute(request):
-    return render(request, "main/contribute.html", {"title": "FOSSDB | Contribute"})
+    return render(request, "contribute.html", {"title": "FOSSDB | Contribute"})
 
 
 def news(request):
-    return render(request, "main/news.html", {"title": "FOSSDB | News"})
+    return render(request, "news.html", {"title": "FOSSDB | News"})
 
 
 def dashboard(request):
-    return render(request, "main/dashboard.html", {"title": "FOSSDB | Dashboard"})
+    return render(request, "dashboard.html", {"title": "FOSSDB | Dashboard"})
 
 
 def help(request):
-    return render(request, "main/help.html", {"title": "FOSSDB | Help"})
+    return render(request, "help.html", {"title": "FOSSDB | Help"})

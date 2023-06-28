@@ -1,8 +1,0 @@
-{
-    "scripts": {
-        "dev": "tailwindcss -i src/static/tailwind/tailwind-input.css -o src/static/css/fossdb-ui.css -w"
-    },
-    "devDependencies": {
-        "tailwindcss": "^3.3.2"
-    }
-}

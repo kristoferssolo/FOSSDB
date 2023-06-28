@@ -13,7 +13,7 @@ def profile(request, username):
         "title": user.username + ("" if not user.full_name else f" ({user.full_name})"),
         "user": user,
     }
-    return render(request, "account/profile.html", context)
+    return render(request, "profile.html", context)
 
 
 def signup_view(request):
@@ -33,7 +33,7 @@ def signup_view(request):
         "title": "Sign Up",
         "form": form,
     }
-    return render(request, "account/signup.html", context)
+    return render(request, "signup.html", context)
 
 
 def login_view(request):
@@ -48,4 +48,4 @@ def login_view(request):
         "title": "Login",
         "form": form,
     }
-    return render(request, "account/login.html", context)
+    return render(request, "login.html", context)

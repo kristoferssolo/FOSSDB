@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     "account",
     "fossdb",
     "django_filters",
+    "tailwind",
+    "tokyonight_night",
+    "django_browser_reload",
     "fontawesomefree",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -56,6 +59,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "FOSSDB.urls"
@@ -65,6 +69,7 @@ TEMPLATES = [
         "BACKEND": "django.template.backends.django.DjangoTemplates",
         "DIRS": [
             BASE_DIR / "templates",
+            BASE_DIR / "**" / "templates",
         ],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -151,6 +156,13 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/login/"
+
+
+TAILWIND_APP_NAME = "tokyonight_night"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # HTTPS settings
 # SESSION_COOKIE_SECURE = True
