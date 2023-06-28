@@ -21,6 +21,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("account.urls")),
     path("", include("fossdb.urls")),
+    path("", include("main.urls")),
     path("", include("django.contrib.auth.urls")),
 ]
 if settings.DEBUG:

@@ -35,6 +35,7 @@ DEBUG = config["DEBUG"]
 # Application definition
 
 INSTALLED_APPS = [
+    "main",
     "account",
     "fossdb",
     "django_filters",

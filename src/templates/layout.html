@@ -21,7 +21,8 @@
                          width="40"
                          src="{% static 'img/icons/logo.svg' %}"
                          alt="logo" />
-                    <a class="hover:text-skyblue transform duration-300 ease-in-out" href="">foss<span class="text-skyblue">db</span></a>
+                    <a class="hover:text-skyblue transform duration-300 ease-in-out"
+                       href="{% url 'homepage' %}">foss<span class="text-skyblue">db</span></a>
                 </div>
                 <!-- search -->
                 <div class="relative items-center flex">
@@ -31,11 +32,16 @@
                 </div>
                 <!-- navbar -->
                 <nav class="uppercase flex gap-x-6 items-center">
-                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">explore</a>
-                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">contribute</a>
-                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">news</a>
-                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">dashboard</a>
-                    <a href="" class="hover:text-skyblue transform duration-200 ease-in-out">help</a>
+                    <a href="{% url 'explore' %}"
+                       class="hover:text-skyblue transform duration-200 ease-in-out">explore</a>
+                    <a href="{% url 'contribute' %}"
+                       class="hover:text-skyblue transform duration-200 ease-in-out">contribute</a>
+                    <a href="{% url 'news' %}"
+                       class="hover:text-skyblue transform duration-200 ease-in-out">news</a>
+                    <a href="{% url 'dashboard' %}"
+                       class="hover:text-skyblue transform duration-200 ease-in-out">dashboard</a>
+                    <a href="{% url 'help' %}"
+                       class="hover:text-skyblue transform duration-200 ease-in-out">help</a>
                 </nav>
             </div>
             <div class="">
@@ -45,6 +51,7 @@
             </div>
         </header>
         <main class="flex-grow">
+            {% block content %}{% endblock %}
         </main>
         <footer class="h-32 flex items-center text-slategray bg-gray-200 mb-1 mt-4 font-condensed">
             <div class="p-8">
