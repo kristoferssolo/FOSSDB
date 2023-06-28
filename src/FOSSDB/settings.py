@@ -21,7 +21,7 @@ sys.path.insert(0, str(BASE_PATH.joinpath("FOSSDB", "apps")))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
-with open(BASE_PATH.joinpath("config.json"), "r", encoding="UTF-8") as config_file:
+with open(BASE_PATH.parent / "config.json", "r", encoding="UTF-8") as config_file:
     config = json.load(config_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -61,7 +61,9 @@ ROOT_URLCONF = "FOSSDB.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_PATH.joinpath("templates")],
+        "DIRS": [
+            BASE_PATH / "templates",
+        ],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -128,10 +130,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = "/static/"
-STATIC_ROOT = BASE_PATH.joinpath("static")
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_PATH.joinpath("media")
+STATIC_URL = "static/"
+STATICFILE_DIRS = [
+    BASE_PATH / "static",
+]
+STATIC_ROOT = BASE_PATH.parent / "local-cdn" / "static"
+
+MEDIA_URL = "media/"
+MEDIAFILES_DIRS = [
+    BASE_PATH / "media",
+]
+MEDIA_ROOT = BASE_PATH.parent / "local-cdn" / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
