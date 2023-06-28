@@ -7,11 +7,8 @@ from django_filters.views import FilterView
 
 from .filters import ProjectFilter
 
-from .forms import ProjectForm
-from .hosting_platform.forms import HostingPlatformForm
-from .models import Project
-from .programming_language.forms import ProgrammingLanguageForm
-from .programming_language.models import ProjectProgrammingLanguage
+from .forms import HostingPlatformForm, ProgrammingLanguageForm, ProjectForm
+from .models import Project, ProjectProgrammingLanguage
 
 ProgrammingLanguageInlineFormset = inlineformset_factory(
     Project,
@@ -23,7 +20,7 @@ ProgrammingLanguageInlineFormset = inlineformset_factory(
 
 class ProjectListView(FilterView):
     model = Project
-    template_name = "fossdb/index.html"
+    template_name = "fossdb/explore.html"
     filterset_class = ProjectFilter
     context_object_name = "projects"
     paginate_by = 10  # optional 10 projects a page

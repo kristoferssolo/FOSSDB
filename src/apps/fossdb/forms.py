@@ -1,6 +1,40 @@
 from django import forms
 
-from .models import Project
+from .models import HostingPlatform, ProgrammingLanguage, Project, ProjectHostingPlatform, ProjectProgrammingLanguage
+
+
+class HostingPlatformForm(forms.ModelForm):
+    class Meta:
+        model = ProjectHostingPlatform
+        fields = (
+            "url",
+            "hosting_platform",
+        )
+        widgets = {
+            "hosting_platform": forms.Select(
+                choices=HostingPlatform.objects.all(),
+            )
+        }
+
+
+class ProgrammingLanguageForm(forms.ModelForm):
+    class Meta:
+        model = ProjectProgrammingLanguage
+        fields = (
+            "programming_language",
+            "percentage",
+        )
+        widgets = {
+            "programming_language": forms.Select(
+                choices=ProgrammingLanguage.objects.all(),
+            ),
+            "percentage": forms.NumberInput(
+                attrs={
+                    "min": "0",
+                    "max": "100",
+                }
+            ),
+        }
 
 
 class ProjectForm(forms.ModelForm):

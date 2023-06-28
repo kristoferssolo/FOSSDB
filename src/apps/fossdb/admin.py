@@ -1,11 +1,16 @@
 from django.contrib import admin
 
-from .hosting_platform.models import HostingPlatform, ProjectHostingPlatform
-from .license.models import License
-from .models import Project
-from .operating_system.models import OperatingSystem, OperatingSystemVersion
-from .programming_language.models import ProgrammingLanguage, ProjectProgrammingLanguage
-from .tag.models import Tag
+from .models import (
+    HostingPlatform,
+    License,
+    OperatingSystem,
+    OperatingSystemVersion,
+    ProgrammingLanguage,
+    Project,
+    ProjectHostingPlatform,
+    ProjectProgrammingLanguage,
+    Tag,
+)
 
 
 class ProjectProgrammingLanguageInline(admin.TabularInline):
