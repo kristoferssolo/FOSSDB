@@ -20,7 +20,10 @@ class ProjectHostingPlatformInline(admin.TabularInline):
 
 class ProjectAdmin(admin.ModelAdmin):
     inlines = [ProjectHostingPlatformInline, ProjectProgrammingLanguageInline]
-    list_display = ("name", "owner", "_languages")
+    list_display = (
+        "name",
+        "owner",
+    )
 
     def _languages(self, object):
         return " | ".join([i.programming_language.name for i in object.projectprogramminglanguage_set.all()])

@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block meta %}{% endblock %}
+{% block content %}
+    <form method="post" id="project-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {{ hosting_platform.management_form }}
+        {{ hosting_platform.as_table }}
+        <div id="language-formset">
+            {{ programming_language.management_form }}
+            {% for form in programming_language %}<div class="language-form">{{ form.as_table }}</div>{% endfor %}
+        </div>
+        <!-- This button will trigger the JS to append another language form -->
+        <button type="button" id="add-more">+</button>
+        <!-- Render the empty form, which you'll use as a template for new entries -->
+        <!-- Wrap it in a container so you can reference it by id and hide it -->
+        <div id="empty-form" style="display:none;">{{ empty_form.as_table }}</div>
+        <button type="submit">Submit</button>
+    </form>
+    <script>
+        document.querySelector("#add-more").addEventListener("click", function() {
+            var formIndex = document.querySelector("#id_language-TOTAL_FORMS").value;
+            var emptyFormDiv = document.querySelector("#empty-form");
+            var newFormHTML = emptyFormDiv.innerHTML.replace(/__prefix__/g, formIndex);
+            var newFormDiv = document.createElement("div");
+            newFormDiv.className = "language-form";
+            newFormDiv.innerHTML = newFormHTML;
+            document.querySelector("#language-formset").append(newFormDiv);
+            document.querySelector("#id_language-TOTAL_FORMS").value = parseInt(formIndex) + 1;
+        });
+    </script>
+{% endblock %}

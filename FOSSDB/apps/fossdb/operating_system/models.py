@@ -17,3 +17,14 @@ class OperatingSystemVersion(models.Model):
 
     def __str__(self):
         return f"{self.operating_system.name} {self.version} {'LTS' if self.is_lts else ''}"
+
+    class Meta:
+        constraints = (
+            models.UniqueConstraint(
+                fields=(
+                    "operating_system",
+                    "version",
+                ),
+                name="unique_os_version",
+            ),
+        )

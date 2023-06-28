@@ -135,3 +135,5 @@ debug
 /static/admin/
 /static/fontawesomefree/
 config.json
+/media/profile_pics/*
+!/media/profile_pics/default.jpg

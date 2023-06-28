@@ -3,6 +3,7 @@
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
+    <p>{{ username }}</p>
     <button>
         <a href="{% url 'add-project' %}">Add Project</a>
     </button>
@@ -10,14 +11,17 @@
         <a href="/admin">Admin</a>
     </button>
     <br />
+    <form action="get">
+        {{ filter.form.as_p }}
+        <button type="submit">Filter</button>
+    </form>
     {% for project in projects %}
         <div>
-            <h2>
-                <a href="{{ project.get_absolute_url }}">{{ project.owner }}/{{ project.name }}</a>
-            </h2>
-            <p>{{ project.description }}</p>
+            <a href="{{ project.get_absolute_url }}">{{ project }}</a>
         </div>
+        <div>{{ project.description }}</div>
+        <hr />
     {% empty %}
-        <p>No projects yet (</p>
+        <p>No projects found</p>
     {% endfor %}
 {% endblock %}

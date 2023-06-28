@@ -37,6 +37,7 @@ DEBUG = config["DEBUG"]
 INSTALLED_APPS = [
     "account",
     "fossdb",
+    "django_filters",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

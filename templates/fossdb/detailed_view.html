@@ -39,7 +39,6 @@
             <p>No language</p>
         {% endfor %}
     </ul>
-    <p>{{ project.date_created|date:"d.m.Y, G:i" }}</p>
     <button>
         <a href="{% url 'project-update' project.owner project.name %}">Update</a>
     </button>

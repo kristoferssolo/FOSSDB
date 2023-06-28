@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import ProjectHostingPlatform, HostingPlatform
+from .models import HostingPlatform, ProjectHostingPlatform
 
 
 class HostingPlatformForm(forms.ModelForm):
