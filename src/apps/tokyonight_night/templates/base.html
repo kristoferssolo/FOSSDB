@@ -54,10 +54,21 @@
                        class="hover:text-skyblue-300 transform duration-200 ease-in-out">help</a>
                 </nav>
             </div>
-            <div class="">
+            <div class="flex items-center justify-between">
                 <a href="" class=""><i class="fa-solid fa-globe fa-lg"></i></a>
-                <a href="{% url 'login' %}"
-                   class="hover:text-skyblue-300 transition duration-300 ease-in-out"><i class="fa-solid fa-user fa-lg ml-4"></i></a>
+                {% if user.is_authenticated %}
+                    <div class="flex items-center justify-between">
+                        <p class="mx-4">{{ user.username }}</p>
+                        <a href="{% url 'profile' user.username %}">
+                            <img src="{{ user.profile.picture.url }}"
+                                 class="w-[2rem]"
+                                 alt="{{ user.username }}'s profile picture" />
+                        </a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}"
+                       class="hover:text-skyblue-300 transition duration-300 ease-in-out"><i class="fa-solid fa-user fa-lg ml-4 "></i></a>
+                {% endif %}
             </div>
         </header>
         <main class="flex flex-col flex-grow">

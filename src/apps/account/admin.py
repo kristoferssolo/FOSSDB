@@ -1,19 +1,18 @@
 from django.contrib import admin
-from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-from .models import User
+from .models import Profile, User
 
 
-class CustomUserAdmin(UserAdmin):
+class ProfileInline(admin.StackedInline):
+    model = Profile
+    can_delete = False
+    verbose_name_plural = "Profile"
+
+
+class UserAdmin(BaseUserAdmin):
     model = User
-    fieldsets = UserAdmin.fieldsets + (
-        (
-            None,
-            {
-                "fields": ("profile_picture",),
-            },
-        ),
-    )
+    inlines = (ProfileInline,)
 
 
-admin.site.register(User, CustomUserAdmin)
+admin.site.register(User, UserAdmin)
