@@ -82,7 +82,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.get_object().owner == self.request.user
 
     def handle_no_permission(self):
-        return redirect("index")
+        return redirect("login")
 
     def get_context_data(self, *args, **kwargs):
         data = super(ProjectUpdateView, self).get_context_data(**kwargs)
@@ -105,4 +105,4 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.get_object().owner == self.request.user
 
     def handle_no_permission(self):
-        return redirect("index")
+        return redirect("login")

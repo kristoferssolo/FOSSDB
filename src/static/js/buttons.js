@@ -1,6 +1,7 @@
 window.addEventListener("DOMContentLoaded", () => {
     const FORM_VERIFY = document.getElementsByClassName("verify")
     const SUBMIT_BUTTON = document.getElementById("submit-button")
+    SUBMIT_BUTTON.disabled = true
 
     Array.from(FORM_VERIFY).forEach((input) => {
         input.addEventListener("input", () => {
