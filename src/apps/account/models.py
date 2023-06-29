@@ -11,7 +11,7 @@ from django.dispatch import receiver
 def get_profile_pic_path(instance, filename) -> Path:
     ext = filename.split(".")[-1]
     filename = f"{instance.id}.{ext}"
-    return Path("profile_pics", filename)
+    return Path("profile-pics", filename)
 
 
 class User(AbstractUser):
