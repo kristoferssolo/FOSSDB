@@ -13,5 +13,8 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("news/", views.news, name="news"),
     path("help/", views.help, name="help"),
+    path("login/", views.login),
+    path("logout/", views.logout),
+    path("signup/", views.signup),
     path("<str:username>/", ProfileProjectListView.as_view(), name="profile"),
 ]
