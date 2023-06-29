@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "tailwind",
     "tokyonight_night",
     "crispy_forms",
-    "django_browser_reload",
     "fontawesomefree",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -60,7 +59,6 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
 ROOT_URLCONF = "FOSSDB.urls"
