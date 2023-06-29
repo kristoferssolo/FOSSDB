@@ -13,38 +13,66 @@
             </h2>
             <!-- os platform icons -->
             <div class="my-4 flex justify-center items-center gap-x-4">
-                <a href="/search/?q=linux"><i class="fa-brands fa-linux fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
-          {% if project.runs_on_linux %}
-              text-lightsteelblue-100
-          {% else %}
-              text-slategray-200
-          {% endif %}"></i></a>
-                <a href="/search/?q=windows"><i class="fa-brands fa-windows fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
-          {% if project.runs_on_windows %}
-              text-lightsteelblue-100
-          {% else %}
-              text-slategray-200
-          {% endif %}"></i></a>
-                <a href="/search/?q=macos"><i class="fa-brands fa-apple fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
-          {% if project.runs_on_macos %}
-              text-lightsteelblue-100
-          {% else %}
-              text-slategray-200
-          {% endif %}"></i></a>
-                <a href="/search/?q=ios"><i id="ios"
-   class="fa-brands fa-app-store-ios fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
-          {% if project.runs_on_ios %}
-              text-lightsteelblue-100
-          {% else %}
-              text-slategray-200
-          {% endif %}"></i></a>
-                <a href="/search/?q=android"><i id="android"
-   class="fa-brands fa-android fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
-          {% if project.runs_on_android %}
-              text-lightsteelblue-100
-          {% else %}
-              text-slategray-200
-          {% endif %}"></i></a>
+                <!-- linux -->
+                <a href="/search/?q=linux">
+                    <span title="Linux"
+                          class="hover:text-lightsteelblue-200 transform duration-200 ease-linear
+                                 {% if project.runs_on_linux %}
+                                     text-lightsteelblue-100
+                                 {% else %}
+                                     text-slategray-200
+                                 {% endif %}">
+                        <i class="fa-brands fa-linux fa-lg"></i>
+                    </span>
+                </a>
+                <!-- windows -->
+                <a href="/search/?q=windows">
+                    <span title="Windows"
+                          class="hover:text-lightsteelblue-200 transform duration-200 ease-linear
+                                 {% if project.runs_on_windows %}
+                                     text-lightsteelblue-100
+                                 {% else %}
+                                     text-slategray-200
+                                 {% endif %}">
+                        <i class="fa-brands fa-windows fa-lg"></i>
+                    </span>
+                </a>
+                <!-- macos -->
+                <a href="/search/?q=macos">
+                    <span title="macOS"
+                          class="hover:text-lightsteelblue-200 transform duration-200 ease-linear
+                                 {% if project.runs_on_macos %}
+                                     text-lightsteelblue-100
+                                 {% else %}
+                                     text-slategray-200
+                                 {% endif %}">
+                        <i class="fa-brands fa-apple fa-lg"></i>
+                    </span>
+                </a>
+                <!-- ios -->
+                <a href="/search/?q=ios">
+                    <span title="iOS"
+                          class="fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
+                                 {% if project.runs_on_ios %}
+                                     text-lightsteelblue-100
+                                 {% else %}
+                                     text-slategray-200
+                                 {% endif %}">
+                        <i class="fa-brands fa-app-store-ios"></i>
+                    </span>
+                </a>
+                <!-- android -->
+                <a href="/search/?q=android">
+                    <span title="Android"
+                          class="hover:text-lightsteelblue-200 transform duration-200 ease-linear
+                                 {% if project.runs_on_android %}
+                                     text-lightsteelblue-100
+                                 {% else %}
+                                     text-slategray-200
+                                 {% endif %}">
+                        <i class="fa-brands fa-android fa-lg"></i>
+                    </span>
+                </a>
             </div>
             <!-- tags -->
             <div class="my-8 flex flex-wrap justify-center items-start gap-2">

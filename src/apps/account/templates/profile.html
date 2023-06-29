@@ -18,9 +18,9 @@
                 <div class="border border-steelblue-100 p-8 flex flex-row gap-4 justify-between">
                     <a href="{{ project.get_absolute_url }}"
                        class="hover:text-steelblue-100 transition duration-300 ease-linear">
-                        <h2 class="font-abel text-2xl">{{ project.name }}</h2>
+                        <h2 class="font-abel text-3xl">{{ project.name }}</h2>
                     </a>
-                    <p class="max-w-xs text-justify">{{ project.description|slice:500 }}</p>
+                    <p class="max-w-2xl text-justify">{{ project.description|slice:500 }}</p>
                 </div>
             {% empty %}
                 <p class="text-center font-abel text-xl">No projects yet.</p>

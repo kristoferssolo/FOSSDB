@@ -38,7 +38,7 @@ body {
 }
 
 .button {
-    @apply font-abel px-12 py-2 border rounded-md transform ease-linear duration-100 hover:bg-opacity-60;
+    @apply font-condensed text-xl px-12 py-2 border rounded-md transform ease-linear duration-100 hover:bg-opacity-60;
 }
 
 .submit-button-disabled {
