@@ -13,33 +13,33 @@
             </h2>
             <!-- os platform icons -->
             <div class="my-4 flex justify-center items-center gap-x-4">
-                <a href="/search/?q=linux"><i class="fa-brands fa-linux fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-linear
+                <a href="/search/?q=linux"><i class="fa-brands fa-linux fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
           {% if project.runs_on_linux %}
               text-lightsteelblue-100
           {% else %}
               text-slategray-200
           {% endif %}"></i></a>
-                <a href="/search/?q=windows"><i class="fa-brands fa-windows fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-linear
+                <a href="/search/?q=windows"><i class="fa-brands fa-windows fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
           {% if project.runs_on_windows %}
               text-lightsteelblue-100
           {% else %}
               text-slategray-200
           {% endif %}"></i></a>
-                <a href="/search/?q=macos"><i class="fa-brands fa-apple fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-linear
+                <a href="/search/?q=macos"><i class="fa-brands fa-apple fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
           {% if project.runs_on_macos %}
               text-lightsteelblue-100
           {% else %}
               text-slategray-200
           {% endif %}"></i></a>
                 <a href="/search/?q=ios"><i id="ios"
-   class="fa-brands fa-app-store-ios fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-linear
+   class="fa-brands fa-app-store-ios fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
           {% if project.runs_on_ios %}
               text-lightsteelblue-100
           {% else %}
               text-slategray-200
           {% endif %}"></i></a>
                 <a href="/search/?q=android"><i id="android"
-   class="fa-brands fa-android fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-linear
+   class="fa-brands fa-android fa-lg hover:text-lightsteelblue-200 transform duration-200 ease-linear
           {% if project.runs_on_android %}
               text-lightsteelblue-100
           {% else %}
@@ -51,7 +51,7 @@
                 {% for tag in project.tag.all|dictsort:"name" %}
                     <a href="/search/?q={{ tag.name }}">
                         <span title="{{ tag.description }}"
-                              class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-300 ease-linear">
+                              class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-200 ease-linear">
                             {{ tag }}
                         </span>
                     </a>
@@ -62,7 +62,7 @@
                 {% for language in project.projectprogramminglanguage_set.all|dictsortreversed:"percentage" %}
                     <a href="/search/?q={{ language.name }}">
                         <span title="{{ language.percentage }}%"
-                              class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-300 ease-linear">
+                              class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-200 ease-linear">
                             {{ language.programming_language }}
                         </span>
                     </a>
@@ -75,7 +75,7 @@
                 <div class="flex justify-between w-full mt-4 font-abel">
                     <!-- licenses -->
                     <div>
-                        <button class="text-xl underline font-abel hover:text-lightsteelblue-200 transform duration-300 ease-linear"
+                        <button class="text-xl underline font-abel hover:text-lightsteelblue-200 transform duration-200 ease-linear"
                                 id="menu-button"
                                 aria-haspopup="true"
                                 aria-expanded="true">Licenses</button>
@@ -83,7 +83,7 @@
                     <!-- hosting platform -->
                     <div class="">
                         <p>
-                            See project source code and read more <a class="underline text-skyblue-300 hover:text-cadetblue-300 transform duration-300 ease-linear"
+                            See project source code and read more <a class="underline text-skyblue-300 hover:text-cadetblue-300 transform duration-200 ease-linear"
     href="{{ project.projecthostingplatform.url }}"
     target="_blank">here</a>!
                         </p>
@@ -100,7 +100,7 @@
                         {% for license in project.license.all|dictsort:"short_name" %}
                             <a href="{{ license.url }}">
                                 <span title="{{ license.full_name }}"
-                                      class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60">
+                                      class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-200 ease-linear">
                                     {{ license }}
                                 </span>
                             </a>
@@ -111,12 +111,12 @@
         </div>
         {% if user == project.owner %}
             <div class="flex justify-between mt-8 mx-16">
-                <button class="button submit-button-enabled text-gray-500 bg-skyblue-300">
-                    <a href="{% url 'project-update' project.owner project.name %}">Update</a>
-                </button>
-                <button class="button submit-button-enabled text-gray-500 bg-burlywood hover:opacity-60">
-                    <a href="{% url 'project-delete' project.owner project.name %}">Delete</a>
-                </button>
+                <a href="{% url 'project-update' project.owner project.name %}">
+                    <button class="button hover:bg-opacity-60 bg-mediumpurple-100 text-gray-500">Update</button>
+                </a>
+                <a href="{% url 'project-delete' project.owner project.name %}">
+                    <button class="button hover:bg-opacity-60 bg-lightcoral text-gray-500">Delete</button>
+                </a>
             </div>
         {% endif %}
     </div>
