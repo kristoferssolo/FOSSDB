@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
-{% block title %}Delete {{ project }}{% endblock %}
+{% block title %}{{ title }}{% endblock %}
 {% block content %}
     <form method="post"
           id="delete-form"
@@ -9,9 +9,9 @@
         {% csrf_token %}
         <input type="text"
                id="confirm-input"
-               class="mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300 text-center" />
+               class="text-center form-field border-slategray-200 hover:border-lightcoral bg-gray-300 focus:border-indianred-100 transition ease-linear" />
         <button id="submit-button"
-                class="px-12 py-2 border border-transparent rounded-md text-lightsteelblue-100 font-bold uppercase bg-slategray-200 opacity-50 transform ease-in-out duration-500 cursor-default"
+                class="button submit-button-disabled text-lightsteelblue-100 bg-slategray-200 uppercase font-bold"
                 type="submit">Delete</button>
     </form>
     <script type="text/javascript">
@@ -23,30 +23,26 @@
         USER_INPUT.addEventListener("input", () => {
             if (confirm_string == USER_INPUT.value) {
                 SUBMIT_BUTTON.classList.remove(
-                    "bg-slategray-200",
+                    "submit-button-disabled",
                     "text-lightsteelblue-100",
-                    "opacity-50",
-                    "cursor-default"
+                    "bg-slategray-200"
                 )
                 SUBMIT_BUTTON.classList.add(
-                    "bg-indianred-100",
+                    "submit-button-enabled",
                     "text-gray-500",
-                    "opacity-100",
-                    "hover:opacity-60"
+                    "bg-indianred-100",
                 )
                 SUBMIT_BUTTON.disabled = false
             } else {
                 SUBMIT_BUTTON.classList.remove(
-                    "bg-indianred-100",
+                    "submit-button-enabled",
                     "text-gray-500",
-                    "opacity-100",
-                    "hover:opacity-60"
+                    "bg-indianred-100",
                 )
                 SUBMIT_BUTTON.classList.add(
-                    "bg-slategray-200",
+                    "submit-button-disabled",
                     "text-lightsteelblue-100",
-                    "opacity-50",
-                    "cursor-default"
+                    "bg-slategray-200"
                 )
                 SUBMIT_BUTTON.disabled = true
             }

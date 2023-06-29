@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Abel&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Rationale&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
-
 body {
     @apply leading-[normal] m-0;
 }
@@ -27,4 +23,28 @@ body {
     height: 0.25rem;
     background: linear-gradient(to right, transparent, #27a1b9, transparent);
     transform: translateY(-50%);
+}
+
+.form-field {
+    @apply mt-1 block rounded-md border-2;
+}
+
+.submit-form {
+    @apply border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-slategray-100 focus:border-cadetblue-300;
+}
+
+.checkbox-form {
+    @apply border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-slategray-100 focus:border-cadetblue-300;
+}
+
+.button {
+    @apply font-condensed text-xl px-12 py-2 border rounded-md transform ease-linear duration-100;
+}
+
+.submit-button-disabled {
+    @apply opacity-60 cursor-default;
+}
+
+.submit-button-enabled {
+    @apply opacity-100 hover:opacity-60 hover:bg-opacity-60;
 }

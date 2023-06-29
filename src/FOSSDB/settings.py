@@ -38,10 +38,9 @@ INSTALLED_APPS = [
     "main",
     "account",
     "fossdb",
-    "django_filters",
+    "search_views",
     "tailwind",
     "tokyonight_night",
-    "crispy_forms",
     "fontawesomefree",
     "django.contrib.admin",
     "django.contrib.auth",
@@ -50,6 +49,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+TAILWIND_APP_NAME = "tokyonight_night"
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -156,12 +162,6 @@ LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 LOGIN_URL = "/login/"
 
-
-TAILWIND_APP_NAME = "tokyonight_night"
-
-INTERNAL_IPS = [
-    "127.0.0.1",
-]
 
 # HTTPS settings
 # SESSION_COOKIE_SECURE = True

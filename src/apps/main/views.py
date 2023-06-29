@@ -1,8 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 
 def homepage(request):
     return render(request, "homepage.html", {"title": "FOSSDB"})
+
+
+def login(request):
+    return redirect("login")
+
+
+def logout(request):
+    return redirect("logout")
+
+
+def signup(request):
+    return redirect("signup")
 
 
 def contribute(request):
