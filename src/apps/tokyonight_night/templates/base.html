@@ -64,9 +64,7 @@
                     <div class="flex items-center justify-between">
                         <p class="mx-4">{{ user.username }}</p>
                         <a href="{% url 'profile' user.username %}">
-                            <img src="{{ user.profile.picture.url }}"
-                                 class="w-[2rem]"
-                                 alt="{{ user.username }}'s profile picture" />
+                            <img src="{{ user.profile.picture.url }}" class="w-[2rem]" alt="pic" />
                         </a>
                     </div>
                 {% else %}
