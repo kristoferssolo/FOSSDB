@@ -4,6 +4,11 @@
 {% block meta %}{% endblock %}
 {% block content %}
     <div class="py-8 px-32">
+        <div class="flex justify-end">
+            <a href="{% url 'settings' %}">
+                <i class="fa-solid fa-gear fa-2xl"></i>
+            </a>
+        </div>
         <h1 class="font-abel text-4xl mb-8">My Projects</h1>
         <div class="grid grid-cols-1 gap-4">
             {% for project in projects %}
