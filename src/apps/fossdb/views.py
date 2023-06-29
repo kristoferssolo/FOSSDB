@@ -28,12 +28,22 @@ class SearchResultsListView(ListView):
             | Q(programming_language__name__icontains=query)
         ).distinct()
 
+    def get_context_data(self, *args, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = "FOSSDB | Search"
+        return data
+
 
 class ProjectListView(ListView):
     model = Project
     template_name = "explore.html"
     context_object_name = "projects"
     paginate_by = 50  # amount of items on screen
+
+    def get_context_data(self, *args, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = "FOSSDB | Explore"
+        return data
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -45,6 +55,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
+        data["title"] = "FOSSDB | Create Project"
         data["hosting_platform"] = HostingPlatformForm(self.request.POST or None)
         data["programming_languages"] = ProgrammingLanguageInlineFormSet(self.request.POST or None)
         return data
@@ -95,6 +106,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
+        data["title"] = f"Edit {self.object}"
         data["hosting_platform"] = HostingPlatformForm(self.request.POST or None, instance=self.object.projecthostingplatform)
         data["programming_languages"] = ProgrammingLanguageInlineFormSet(self.request.POST or None, instance=self.object)
         return data
@@ -133,3 +145,8 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def handle_no_permission(self):
         return redirect("login")
+
+    def get_context_data(self, *args, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = f"Delete {self.object}"
+        return data

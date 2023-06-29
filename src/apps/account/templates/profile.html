@@ -3,8 +3,20 @@
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
-    <h1>{{ user.username }}</h1>
-    <img src="{{ user.profile_picture.url }}"
-         alt="{{ user.username }}’s profile picture" />
-    <p>{{ user.email }}</p>
+    <div class="py-8 px-32">
+        <h1 class="font-abel text-4xl mb-8">My Projects</h1>
+        <div class="grid grid-cols-1 gap-4">
+            {% for project in projects %}
+                <div class="border border-steelblue-100 p-8 flex flex-row gap-4 justify-between">
+                    <a href="{{ project.get_absolute_url }}"
+                       class="hover:text-steelblue-100 transition duration-300 ease-linear">
+                        <h2 class="font-abel text-2xl">{{ project.name }}</h2>
+                    </a>
+                    <p class="max-w-xs text-justify">{{ project.description|slice:500 }}</p>
+                </div>
+            {% empty %}
+                <p class="text-center font-abel text-xl">No projects yet.</p>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}

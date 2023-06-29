@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     path("signup/", views.signup_view, name="signup"),
     path("login/", views.login_view, name="login"),
-    path("<str:username>/", views.profile, name="profile"),
+    path("<str:username>/", views.ProfileProjectListView.as_view(), name="profile"),
 ]
