@@ -35,9 +35,9 @@ DEBUG = config["DEBUG"]
 # Application definition
 
 INSTALLED_APPS = [
-    "main",
-    "account",
     "fossdb",
+    "account",
+    "main",
     "search_views",
     "tailwind",
     "tokyonight_night",
