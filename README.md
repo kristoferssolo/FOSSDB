@@ -19,15 +19,26 @@ FOSSDB is an open-source web application that helps users find, contribute, and 
 pip install -r requirements.txt
 ```
 3. Enter your `SECRET_KEY` and database information into `config.json` file.
-4. Run database migrations:
+4. Install and build tailwind.
+```sh
+python manage.py tailwind install
+```
+```sh
+python manage.py tailwind build
+```
+5. Run database migrations:
 ```sh
 python manage.py migrate
 ```
-5. Create a superuser:
+6. Collect static files
+```sh
+python manage.py collectstatic
+```
+7. Create a superuser:
 ```sh
 python manage.py createsuperuser
 ```
-6. Run the development server:
+8. Run the development server:
 ```sh
 python manage.py runserver
 ```
