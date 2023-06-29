@@ -20,8 +20,7 @@ from django.urls import include, path
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("main.urls")),
-    path("", include("django.contrib.auth.urls")),
-    path("settings/", include("account.urls")),
+    path("auth/", include("account.urls")),
     path("<str:owner>/<str:project_name>/", include("fossdb.urls")),
 ]
 if settings.DEBUG:
