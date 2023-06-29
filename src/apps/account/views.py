@@ -1,8 +1,7 @@
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import get_object_or_404, redirect, render
 
-from .forms import SignUpForm
+from .forms import LoginForm, SignUpForm
 from .models import User
 
 
@@ -34,7 +33,7 @@ def signup_view(request):
 
 
 def login_view(request):
-    form = AuthenticationForm(data=request.POST or None)
+    form = LoginForm(data=request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             user = form.get_user()

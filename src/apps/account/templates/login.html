@@ -8,18 +8,7 @@
     <form method="post"
           class="flex flex-col items-center justify-center space-y-4 my-auto">
         {% csrf_token %}
-        <input type="text"
-               placeholder="Username"
-               name="username"
-               value="{{ form.username.value|default:'' }}"
-               class="verify form-field submit-form" />
-        {% if form.username.errors %}<p class="text-indianred-100 text-xs italic">{{ form.username.errors }}</p>{% endif %}
-        <input type="password"
-               placeholder="Password"
-               name="password"
-               value="{{ form.username.value|default:'' }}"
-               class="verify form-field submit-form" />
-        {% if form.password.errors %}<p class="text-indianred-100 text-xs italic">{{ form.password.errors }}</p>{% endif %}
+        {{ form }}
         <button type="submit"
                 id="submit-button"
                 class="button submit-button-disabled text-lightsteelblue-100 bg-slategray-200">Login</button>
