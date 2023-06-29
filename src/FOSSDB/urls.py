@@ -23,7 +23,6 @@ urlpatterns = [
     path("", include("main.urls")),
     path("", include("account.urls")),
     path("", include("django.contrib.auth.urls")),
-    path("__reload__/", include("django_browser_reload.urls")),
 ]
 if settings.DEBUG:
     from django.conf.urls.static import static
