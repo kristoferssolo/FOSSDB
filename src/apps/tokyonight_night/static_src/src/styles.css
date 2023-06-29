@@ -38,7 +38,7 @@ body {
 }
 
 .button {
-    @apply font-condensed text-xl px-12 py-2 border rounded-md transform ease-linear duration-100 hover:bg-opacity-60;
+    @apply font-condensed text-xl px-12 py-2 border rounded-md transform ease-linear duration-100;
 }
 
 .submit-button-disabled {
@@ -46,5 +46,5 @@ body {
 }
 
 .submit-button-enabled {
-    @apply opacity-100 hover:opacity-60;
+    @apply opacity-100 hover:opacity-60 hover:bg-opacity-60;
 }
