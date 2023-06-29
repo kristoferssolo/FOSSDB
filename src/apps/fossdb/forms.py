@@ -64,7 +64,7 @@ ProgrammingLanguageInlineFormSet = inlineformset_factory(
     Project,
     ProjectProgrammingLanguage,
     form=ProgrammingLanguageForm,
-    extra=1,
+    extra=0,
     can_delete=True,
 )
 

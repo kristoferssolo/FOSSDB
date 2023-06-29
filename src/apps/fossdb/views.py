@@ -138,7 +138,7 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     slug_url_kwarg = "project_name"
     login_url = "/login/"
     redirect_field_name = "redirect_to"
-    success_url = reverse_lazy("homepage")
+    success_url = reverse_lazy("explore")
 
     def test_func(self):
         return self.get_object().owner == self.request.user
