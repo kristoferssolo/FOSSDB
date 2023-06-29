@@ -31,26 +31,17 @@
         {{ programming_languages.management_form }}
         <!-- Languages container -->
         <div class="" id="languages-container">
-            {% for language in programming_languages %}
-                <div class="languages flex gap-4 items-center">
-                    {{ language.programming_language }}
-                    {{ language.percentage }}
-                </div>
-            {% endfor %}
+            {% for language in programming_languages %}<div class="flex gap-4 items-center">{{ language }}</div>{% endfor %}
         </div>
         <!-- Hidden empty form used as a template -->
         <div id="empty-form" style="display:none">
-            <div class="flex gap-4 items-center">
-                {{ programming_languages.empty_form.programming_language }}
-                {{ programming_languages.empty_form.percentage }}
-                <button class="button submit-button-enabled text-gray-500 bg-indianred-100 remove-btn"
-                        type="button">Remove</button>
-            </div>
+            <div class="flex gap-4 items-center">{{ programming_languages.empty_form }}</div>
         </div>
         <div class="flex justify-between">
-            <button class="button submit-button-enabled bg-skyblue-300 text-gray-500"
-                    type="button"
-                    id="add-language">+</button>
+            <div class="p-2 text-mediumaquamarine cursor-pointer hover:opacity-50 transition duration-100 ease-linear"
+                 id="add-language">
+                <i class="fa-solid fa-plus fa-2xl"></i>
+            </div>
         </div>
         <button class="button submit-button-enabled bg-mediumaquamarine text-gray-500"
                 ype="submit">Save</button>
@@ -68,12 +59,6 @@
 
                 formIndex.value = parseInt(formIndex.value) + 1;
             })
-            document.getElementById("languages-container").addEventListener("click", (e) => {
-                if (e.target && e.target.classList.contains("remove-btn")) {
-                    e.target.previousElementSibling.previousElementSibling.value = "";
-                    e.target.parentElement.style.display = "none"
-                }
-            });
-        });
+        })
     </script>
 {% endblock %}
