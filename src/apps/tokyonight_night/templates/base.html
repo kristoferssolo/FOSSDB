@@ -32,27 +32,30 @@
                          width="40"
                          src="{% static 'img/icons/logo.svg' %}"
                          alt="logo" />
-                    <a class="hover:text-skyblue-300 transform duration-300 ease-in-out"
+                    <a class="hover:text-skyblue-300 transform duration-300 ease-linear"
                        href="{% url 'homepage' %}">foss<span class="text-skyblue-300">db</span></a>
                 </div>
                 <!-- search -->
-                <div class="relative items-center flex">
+                <form action="{% url 'search' %}"
+                      method="get"
+                      class="relative items-center flex">
                     <input type="text"
+                           name="q"
                            placeholder="Search projects..."
-                           class="py-2 mx-4 placeholder-slategray-100 bg-gray-300 border-0 border-b-2 border-b-slategray-100 hover:border-b-lightsteelblue-100 transform duration-200 ease-in-out focus:outline-none focus:border-b-skyblue-300 focus:border-b-2 max-w-[10rem]" />
-                </div>
+                           class="py-2 mx-4 placeholder-slategray-100 bg-gray-300 border-0 border-b-2 border-b-slategray-100 hover:border-b-lightsteelblue-100 transform duration-200 ease-linear focus:outline-none focus:border-b-skyblue-300 focus:border-b-2 max-w-[10rem]" />
+                </form>
                 <!-- navbar -->
                 <nav class="uppercase flex gap-x-6 items-center">
                     <a href="{% url 'explore' %}"
-                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">explore</a>
+                       class="hover:text-skyblue-300 transform duration-200 ease-linear">explore</a>
                     <a href="{% url 'contribute' %}"
-                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">contribute</a>
+                       class="hover:text-skyblue-300 transform duration-200 ease-linear">contribute</a>
                     <a href="{% url 'news' %}"
-                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">news</a>
+                       class="hover:text-skyblue-300 transform duration-200 ease-linear">news</a>
                     <a href="{% url 'dashboard' %}"
-                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">dashboard</a>
+                       class="hover:text-skyblue-300 transform duration-200 ease-linear">dashboard</a>
                     <a href="{% url 'help' %}"
-                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">help</a>
+                       class="hover:text-skyblue-300 transform duration-200 ease-linear">help</a>
                 </nav>
             </div>
             <div class="flex items-center justify-between">
@@ -68,7 +71,7 @@
                     </div>
                 {% else %}
                     <a href="{% url 'login' %}"
-                       class="hover:text-skyblue-300 transition duration-300 ease-in-out"><i class="fa-solid fa-user fa-lg ml-4 "></i></a>
+                       class="hover:text-skyblue-300 transition duration-300 ease-linear"><i class="fa-solid fa-user fa-lg ml-4 "></i></a>
                 {% endif %}
             </div>
         </header>

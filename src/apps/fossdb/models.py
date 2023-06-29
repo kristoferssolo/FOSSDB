@@ -6,8 +6,8 @@ from django.db import models
 
 
 class License(models.Model):
-    short_name = models.CharField(max_length=50, unique=True)
-    full_name = models.CharField(max_length=100, unique=True)
+    short_name = models.CharField(max_length=50, unique=True, db_index=True)
+    full_name = models.CharField(max_length=100, unique=True, db_index=True)
     url = models.URLField(blank=True, default="")
     text = models.TextField(blank=True, default="")
 
@@ -16,7 +16,7 @@ class License(models.Model):
 
 
 class OperatingSystem(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, db_index=True)
     description = models.TextField(blank=True, default="")
     is_linux = models.BooleanField(blank=True, default=False)
 
@@ -55,7 +55,7 @@ class Tag(models.Model):
 
 
 class ProgrammingLanguage(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    name = models.CharField(max_length=100, unique=True, db_index=True)
 
     def __str__(self):
         return self.name
@@ -64,7 +64,7 @@ class ProgrammingLanguage(models.Model):
 class Project(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, verbose_name="ID")
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, db_index=True)
     description = models.TextField(blank=True, default="")
     license = models.ManyToManyField(License, blank=True)
     tag = models.ManyToManyField(Tag, blank=True)
@@ -117,7 +117,7 @@ class Project(models.Model):
 class ProjectProgrammingLanguage(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     programming_language = models.ForeignKey(ProgrammingLanguage, on_delete=models.CASCADE)
-    percentage = models.PositiveIntegerField(blank=True, null=True)
+    percentage = models.PositiveIntegerField(blank=True, default=0)
 
     def __str__(self):
         return f"{self.project.owner}/{self.project.name} | {self.programming_language} | {self.percentage}%"

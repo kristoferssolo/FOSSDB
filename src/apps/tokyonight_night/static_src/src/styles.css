@@ -38,7 +38,7 @@ body {
 }
 
 .button {
-    @apply font-abel px-12 py-2 border rounded-md transform ease-in-out duration-500;
+    @apply font-abel px-12 py-2 border rounded-md transform ease-linear duration-500;
 }
 
 .submit-button-disabled {

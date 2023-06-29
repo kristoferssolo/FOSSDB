@@ -1,21 +1,39 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 from django.shortcuts import redirect
-from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
+from django.urls import reverse_lazy
 
-from django_filters.views import FilterView
-
-from .filters import ProjectFilter
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from .forms import HostingPlatformForm, ProgrammingLanguageInlineFormSet, ProjectForm
 from .models import Project
 
 
-class ProjectListView(FilterView):
+class SearchResultsListView(ListView):
+    model = Project
+    template_name = "search.html"
+    context_object_name = "projects"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        return Project.objects.filter(
+            Q(owner__username__icontains=query)
+            | Q(name__icontains=query)
+            # | Q(description__icontains=query)
+            | Q(license__short_name__icontains=query)
+            | Q(license__full_name__icontains=query)
+            | Q(tag__name__icontains=query)
+            | Q(operating_system__operating_system__name__icontains=query)
+            | Q(operating_system__codename__icontains=query)
+            | Q(programming_language__name__icontains=query)
+        ).distinct()
+
+
+class ProjectListView(ListView):
     model = Project
     template_name = "explore.html"
-    filterset_class = ProjectFilter
     context_object_name = "projects"
-    paginate_by = 100  # optional 10 projects a page
+    paginate_by = 50  # amount of items on screen
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):
@@ -108,7 +126,7 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     slug_url_kwarg = "project_name"
     login_url = "/login/"
     redirect_field_name = "redirect_to"
-    success_url = "/"
+    success_url = reverse_lazy("homepage")
 
     def test_func(self):
         return self.get_object().owner == self.request.user
