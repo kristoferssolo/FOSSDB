@@ -4,3 +4,4 @@ fontawesomefree==6.4.0
 mysqlclient==2.1.1
 django-tailwind==3.6.0
 django-search-views==0.3.7
+gunicorn==20.1.0
