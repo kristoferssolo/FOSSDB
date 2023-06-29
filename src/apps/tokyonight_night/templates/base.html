@@ -1,0 +1,94 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+    <head>
+        <link rel="icon" href="{% static 'img/icons/logo.svg' %}" />
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Abel&family=Rationale&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+              rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Abel&family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+              rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+              rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+              rel="stylesheet" />
+        {% tailwind_css %}
+        <link href="{% static 'fontawesomefree/css/all.min.css' %}"
+              rel="stylesheet" />
+        {% block meta %}{% endblock %}
+        <title>
+            {% block title %}{% endblock %}
+        </title>
+    </head>
+    <body class="text-lightsteelblue-100 bg-gray-300 flex flex-col min-h-screen font-roboto">
+        <header class="flex justify-between items-center px-6 py-2 font-abel text-xl">
+            <div class="flex justify-between">
+                <!-- logo -->
+                <div class="flex items-center text-4xl font-abel">
+                    <img class=""
+                         width="40"
+                         src="{% static 'img/icons/logo.svg' %}"
+                         alt="logo" />
+                    <a class="hover:text-skyblue-300 transform duration-300 ease-in-out"
+                       href="{% url 'homepage' %}">foss<span class="text-skyblue-300">db</span></a>
+                </div>
+                <!-- search -->
+                <div class="relative items-center flex">
+                    <input type="text"
+                           placeholder="Search projects..."
+                           class="py-2 mx-4 placeholder-slategray-100 bg-gray-300 border-0 border-b-2 border-b-slategray-100 hover:border-b-lightsteelblue-100 transform duration-200 ease-in-out focus:outline-none focus:border-b-skyblue-300 focus:border-b-2 max-w-[10rem]" />
+                </div>
+                <!-- navbar -->
+                <nav class="uppercase flex gap-x-6 items-center">
+                    <a href="{% url 'explore' %}"
+                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">explore</a>
+                    <a href="{% url 'contribute' %}"
+                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">contribute</a>
+                    <a href="{% url 'news' %}"
+                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">news</a>
+                    <a href="{% url 'dashboard' %}"
+                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">dashboard</a>
+                    <a href="{% url 'help' %}"
+                       class="hover:text-skyblue-300 transform duration-200 ease-in-out">help</a>
+                </nav>
+            </div>
+            <div class="flex items-center justify-between">
+                <a href="" class=""><i class="fa-solid fa-globe fa-lg"></i></a>
+                {% if user.is_authenticated %}
+                    <div class="flex items-center justify-between">
+                        <p class="mx-4">{{ user.username }}</p>
+                        <a href="{% url 'profile' user.username %}">
+                            <img src="{{ user.profile.picture.url }}"
+                                 class="w-[2rem]"
+                                 alt="{{ user.username }}'s profile picture" />
+                        </a>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}"
+                       class="hover:text-skyblue-300 transition duration-300 ease-in-out"><i class="fa-solid fa-user fa-lg ml-4 "></i></a>
+                {% endif %}
+            </div>
+        </header>
+        <main class="flex flex-col flex-grow">
+            {% block content %}{% endblock %}
+        </main>
+        <footer class="w-full h-32 flex items-center text-slategray-200 bg-gray-500 mt-32 font-condensed border-gradient-horizontal">
+            <div class="p-8">
+                <div class="space-y-4 text-left">
+                    <p>
+                        FOSSDB is a passion project of <a class="underline"
+    href="https://github.com/kristoferssolo"
+    target="_blank">@kristoferssolo</a> and a dedicated community of reporters.
+                    </p>
+                    <!-- TODO: finish these sentences -->
+                    <p>This site uses data from GitHub as well as data...</p>
+                    <p>This site has no affiliation with GitHub or any other hosting platform.</p>
+                </div>
+                <div></div>
+            </div>
+        </footer>
+    </body>
+</html>

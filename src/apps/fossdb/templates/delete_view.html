@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Delete {{ project }}{% endblock %}
+{% block content %}
+    <form method="post"
+          id="delete-form"
+          class="flex flex-col items-center justify-center space-y-4 my-auto">
+        <p class="font-bold">To confirm, type "{{ project.owner.username }}/{{ project.name }}" in the box below</p>
+        {% csrf_token %}
+        <input type="text"
+               id="confirm-input"
+               class="mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300 text-center" />
+        <button id="submit-button"
+                class="px-12 py-2 border border-transparent rounded-md text-lightsteelblue-100 font-bold uppercase bg-slategray-200 opacity-50 transform ease-in-out duration-500 cursor-default"
+                type="submit">Delete</button>
+    </form>
+    <script type="text/javascript">
+        var confirm_string = "{{ project.owner.username }}/{{ project.name }}"
+        const USER_INPUT = document.getElementById("confirm-input")
+        const SUBMIT_BUTTON = document.getElementById("submit-button")
+        SUBMIT_BUTTON.disabled = true
+
+        USER_INPUT.addEventListener("input", () => {
+            if (confirm_string == USER_INPUT.value) {
+                SUBMIT_BUTTON.classList.remove(
+                    "bg-slategray-200",
+                    "text-lightsteelblue-100",
+                    "opacity-50",
+                    "cursor-default"
+                )
+                SUBMIT_BUTTON.classList.add(
+                    "bg-indianred-100",
+                    "text-gray-500",
+                    "opacity-100",
+                    "hover:opacity-60"
+                )
+                SUBMIT_BUTTON.disabled = false
+            } else {
+                SUBMIT_BUTTON.classList.remove(
+                    "bg-indianred-100",
+                    "text-gray-500",
+                    "opacity-100",
+                    "hover:opacity-60"
+                )
+                SUBMIT_BUTTON.classList.add(
+                    "bg-slategray-200",
+                    "text-lightsteelblue-100",
+                    "opacity-50",
+                    "cursor-default"
+                )
+                SUBMIT_BUTTON.disabled = true
+            }
+        })
+    </script>
+{% endblock %}

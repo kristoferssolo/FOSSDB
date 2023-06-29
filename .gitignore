@@ -132,5 +132,7 @@ dmypy.json
 config.json
 debug
 
-/static/admin/
-/static/fontawesomefree/
+local-cdn/
+config.json
+node_modules/
+package-lock.json

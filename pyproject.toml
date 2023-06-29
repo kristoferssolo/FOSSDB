@@ -1,12 +1,8 @@
-[build-system]
-requires = ["setuptools>=42.0", "wheel"]
-build-backend = "setuptools.build_meta"
-
 [tool.mypy]
 check_untyped_defs = true
 disallow_any_generics = true
 ignore_missing_imports = true
-mypy_path = "FOSSDB_web"
+mypy_path = "FOSSDB"
 no_implicit_optional = true
 no_implicit_reexport = true
 show_error_codes = true
@@ -15,3 +11,27 @@ warn_redundant_casts = true
 warn_return_any = true
 warn_unreachable = true
 warn_unused_configs = true
+
+[tool.ruff]
+line-length = 160
+exclude = ["**/**/migrations"]
+
+
+[tool.black]
+line-length = 160
+
+[tool.ruff.flake8-quotes]
+docstring-quotes = "double"
+
+[tool.djlint]
+close_void_tags = true
+format_attribute_template_tags = true
+format_css = true
+format_js = true
+max_line_length = 120
+
+[tool.djlint.css]
+indent_size = 4
+
+[tool.djlint.js]
+indent_size = 4

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block meta %}{% endblock %}
+{% block content %}
+    <h1>{{ user.username }}</h1>
+    <img src="{{ user.profile_picture.url }}"
+         alt="{{ user.username }}’s profile picture" />
+    <p>{{ user.email }}</p>
+{% endblock %}

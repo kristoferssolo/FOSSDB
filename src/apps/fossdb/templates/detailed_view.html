@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ project.owner }}/{{ project.name }}{% endblock %}
+{% block meta %}
+    <script src="{% static 'js/buttons.js' %}" defer></script>
+{% endblock meta %}
+{% block content %}
+    <div class="mx-auto font-condensed max-w-[60%] min-w-[32rem]">
+        <div class="p-8">
+            <h1 class="text-center text-4xl font-abel">{{ project.name }}</h1>
+            <h2 class="text-center text-2xl font-abel">
+                <a href="{% url 'profile' project.owner.username %}">By <span class="underline">{{ project.owner }}</span></a>
+            </h2>
+            <!-- os platform icons -->
+            <div class="my-4 flex justify-center items-center gap-x-4">
+                <a href=""><i class="fa-brands fa-linux fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-in-out
+          {% if project.runs_on_linux %}
+              text-lightsteelblue-100
+          {% else %}
+              text-slategray-200
+          {% endif %}"></i></a>
+                <a href=""><i class="fa-brands fa-windows fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-in-out
+          {% if project.runs_on_windows %}
+              text-lightsteelblue-100
+          {% else %}
+              text-slategray-200
+          {% endif %}"></i></a>
+                <a href=""><i class="fa-brands fa-apple fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-in-out
+          {% if project.runs_on_macos %}
+              text-lightsteelblue-100
+          {% else %}
+              text-slategray-200
+          {% endif %}"></i></a>
+                <a href=""><i id="ios"
+   class="fa-brands fa-app-store-ios fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-in-out
+          {% if project.runs_on_ios %}
+              text-lightsteelblue-100
+          {% else %}
+              text-slategray-200
+          {% endif %}"></i></a>
+                <a href=""><i id="android"
+   class="fa-brands fa-android fa-lg hover:text-lightsteelblue-200 transform duration-300 ease-in-out
+          {% if project.runs_on_android %}
+              text-lightsteelblue-100
+          {% else %}
+              text-slategray-200
+          {% endif %}"></i></a>
+            </div>
+            <!-- tags -->
+            <div class="my-8 flex flex-wrap justify-center items-start gap-2">
+                {% for tag in project.tag.all|dictsort:"name" %}
+                    <a href="">
+                        <span title="{{ tag.description }}"
+                              class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-300 ease-in-out">
+                            {{ tag }}
+                        </span>
+                    </a>
+                {% endfor %}
+            </div>
+            <!-- programming languages -->
+            <div class="my-8 flex flex-wrap justify-center items-start gap-2">
+                {% for language in project.projectprogramminglanguage_set.all|dictsortreversed:"percentage" %}
+                    <a href="">
+                        <span title="{{ language.percentage }}%"
+                              class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60 transform duration-300 ease-in-out">
+                            {{ language.programming_language }}
+                        </span>
+                    </a>
+                {% endfor %}
+            </div>
+            <!-- text -->
+            <p class="text-justify font-roboto my-12">{{ project.description }}</p>
+            <div class="">
+                <!-- hosting platform and licenses on one line -->
+                <div class="flex justify-between w-full mt-4 font-abel">
+                    <!-- licenses -->
+                    <div>
+                        <button class="text-xl underline font-abel hover:text-lightsteelblue-200 transform duration-300 ease-in-out"
+                                id="menu-button"
+                                aria-haspopup="true"
+                                aria-expanded="true">Licenses</button>
+                    </div>
+                    <!-- hosting platform -->
+                    <div class="">
+                        <p>
+                            See project source code and read more <a class="underline text-skyblue-300 hover:text-cadetblue-300 transform duration-300 ease-in-out"
+    href="{{ project.projecthostingplatform.url }}"
+    target="_blank">here</a>!
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full">
+                    <div class="my-4 flex flex-wrap justify-center items-start gap-2"
+                         role="menu"
+                         id="dropdown-menu"
+                         aria-orientation="vertical"
+                         aria-labelledby="menu-button"
+                         tabindex="-1"
+                         style="display:none">
+                        {% for license in project.license.all|dictsort:"short_name" %}
+                            <a href="{{ license.url }}">
+                                <span title="{{ license.full_name }}"
+                                      class="bg-opacity-0 border rounded-xl border-slategray-200 px-3 text-xs min-w-16 hover:bg-steelblue-400 hover:bg-opacity-60">
+                                    {{ license }}
+                                </span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if user == project.owner %}
+            <div class="flex justify-between mt-8 mx-16">
+                <button class="px-12 py-2 border border-transparent rounded-md text-gray-500 bg-skyblue-300 hover:opacity-60 transform ease-in-out duration-500">
+                    <a href="{% url 'project-update' project.owner project.name %}">Update</a>
+                </button>
+                <button class="px-12 py-2 border border-transparent rounded-md text-gray-500 bg-burlywood hover:opacity-60 transform ease-in-out duration-500">
+                    <a href="{% url 'project-delete' project.owner project.name %}">Delete</a>
+                </button>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

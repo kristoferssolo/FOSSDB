@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block meta %}
+    <script src="{% static 'js/buttons.js' %}" defer></script>
+{% endblock meta %}
+{% block content %}
+    <form method="post"
+          id="form-field"
+          class="flex flex-col items-center justify-center space-y-4 my-auto">
+        {% csrf_token %}
+        <input type="text"
+               placeholder="Username"
+               name="username"
+               value="{{ form.username.value|default:'' }}"
+               class="verify mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300" />
+        {% if form.username.errors %}<p class="text-indianred-100 text-xs italic">{{ form.username.errors }}</p>{% endif %}
+        <input type="email"
+               placeholder="Email (optional)"
+               name="email"
+               value="{{ form.email.value|default:'' }}"
+               class="mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300" />
+        {% if form.email.errors %}<p class="text-indianred-100 text-xs italic">{{ form.email.errors }}</p>{% endif %}
+        <input type="password"
+               placeholder="Password"
+               name="password1"
+               value="{{ form.password1.value|default:'' }}"
+               class="verify mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300" />
+        {% if form.password1.errors %}<p class="text-indianred-100 text-xs italic">{{ form.password1.errors }}</p>{% endif %}
+        <input type="password"
+               placeholder="Confirm password"
+               name="password2"
+               value="{{ form.password2.value|default:'' }}"
+               class="verify mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300" />
+        {% if form.password2.errors %}<p class="text-indianred-100 text-xs italic">{{ form.password2.errors }}</p>{% endif %}
+        <button type="submit"
+                id="submit-button"
+                class="px-12 py-2 border border-transparent rounded-md text-lightsteelblue-100 bg-slategray-200 opacity-50 transform ease-in-out duration-500 cursor-default">
+            Sign Up
+        </button>
+        <p>
+            Have an account? Login <a class="underline text-skyblue-300" href="{% url 'login' %}">Here</a>!
+        </p>
+    </form>
+{% endblock %}

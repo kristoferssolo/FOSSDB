@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{ title }}{% endblock %}
+{% block meta %}{% endblock %}
+{% block content %}
+    {% for project in projects %}
+        <div>
+            <a href="{{ project.get_absolute_url }}">{{ project }}</a>
+        </div>
+        <div>{{ project.description }}</div>
+        <hr />
+    {% empty %}
+        <p>No projects found</p>
+    {% endfor %}
+{% endblock %}
