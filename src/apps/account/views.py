@@ -109,3 +109,9 @@ def login_view(request):
         "form": form,
     }
     return render(request, "login.html", context)
+
+
+class LogoutView(View):
+    def get(self, request):
+        logout(request)
+        return redirect("login")
