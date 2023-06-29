@@ -23,7 +23,7 @@ class ProjectListView(FilterView):
     template_name = "explore.html"
     filterset_class = ProjectFilter
     context_object_name = "projects"
-    paginate_by = 10  # optional 10 projects a page
+    paginate_by = 100  # optional 10 projects a page
 
 
 class ProjectCreateView(LoginRequiredMixin, CreateView):

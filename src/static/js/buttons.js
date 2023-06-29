@@ -39,3 +39,13 @@ window.addEventListener("DOMContentLoaded", () => {
         })
     })
 })
+
+window.addEventListener("DOMContentLoaded", () => {
+    document
+        .getElementById("menu-button")
+        .addEventListener("click", function() {
+            document.getElementById("dropdown-menu").style.display =
+                this.ariaExpanded === "true" ? "none" : "flex"
+            this.ariaExpanded = this.ariaExpanded === "true" ? "false" : "true"
+        })
+})

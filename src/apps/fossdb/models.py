@@ -18,6 +18,7 @@ class License(models.Model):
 class OperatingSystem(models.Model):
     name = models.CharField(max_length=100, unique=True)
     description = models.TextField(blank=True, default="")
+    is_linux = models.BooleanField(blank=True, default=False)
 
     def __str__(self):
         return self.name
@@ -74,6 +75,26 @@ class Project(models.Model):
     @property
     def star_amount(self):
         return self.star.count()
+
+    @property
+    def runs_on_macos(self):
+        return self.operating_system.filter(operating_system__name="macOS").exists()
+
+    @property
+    def runs_on_linux(self):
+        return self.operating_system.filter(operating_system__is_linux=True).exists()
+
+    @property
+    def runs_on_windows(self):
+        return self.operating_system.filter(operating_system__name="Windows").exists()
+
+    @property
+    def runs_on_ios(self):
+        return self.operating_system.filter(operating_system__name="iOS").exists()
+
+    @property
+    def runs_on_android(self):
+        return self.operating_system.filter(operating_system__name="Android").exists()
 
     def get_absolute_url(self):
         return f"/{self.owner}/{self.name}"

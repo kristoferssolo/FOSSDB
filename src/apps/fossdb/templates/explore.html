@@ -3,18 +3,6 @@
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
-    <p>{{ username }}</p>
-    <button>
-        <a href="{% url 'add-project' %}">Add Project</a>
-    </button>
-    <button>
-        <a href="/admin">Admin</a>
-    </button>
-    <br />
-    <form action="get">
-        {{ filter.form.as_p }}
-        <button type="submit">Filter</button>
-    </form>
     {% for project in projects %}
         <div>
             <a href="{{ project.get_absolute_url }}">{{ project }}</a>
