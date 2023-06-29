@@ -50,7 +50,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     model = Project
     form_class = ProjectForm
     template_name = "create_view.html"
-    login_url = "/login/"
+    login_url = reverse_lazy("login")
     redirect_field_name = "redirect_to"
 
     def get_context_data(self, *args, **kwargs):
@@ -95,7 +95,7 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     form_class = ProjectForm
     slug_field = "name"
     slug_url_kwarg = "project_name"
-    login_url = "/login/"
+    login_url = reverse_lazy("login")
     redirect_field_name = "redirect_to"
 
     def test_func(self):
@@ -136,7 +136,7 @@ class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = "delete_view.html"
     slug_field = "name"
     slug_url_kwarg = "project_name"
-    login_url = "/login/"
+    login_url = reverse_lazy("login")
     redirect_field_name = "redirect_to"
     success_url = reverse_lazy("explore")
 
