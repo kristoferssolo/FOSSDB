@@ -1,12 +1,66 @@
-from django.contrib.auth import authenticate, login
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import get_object_or_404, redirect, render
-from django.views.generic import ListView
+from django.shortcuts import redirect, render
+from django.views.generic import ListView, TemplateView
+
 from fossdb.models import Project
 
-from .forms import LoginForm, SignUpForm
-from .models import User
+from .forms import LoginForm, SignUpForm, UserChangeForm
+
+
+class ProfileUpdateView(LoginRequiredMixin, TemplateView):
+    template_name = "setting.html"
+    login_url = "/login/"
+    redirect_field_name = "redirect_to"
+
+    def get(self, request):
+        user_form = UserChangeForm(instance=request.user)
+        context = {
+            "title": "Your profile",
+            "user_form": user_form,
+        }
+        return self.render_to_response(context)
+
+    def post(self, request):
+        user_form = UserChangeForm(request.POST, instance=request.user)
+
+        if user_form.is_valid():
+            user_form.save()
+            messages.add_message(request, messages.SUCCESS, "Your profile was successfully updated!")
+
+        context = {
+            "title": "Your profile",
+            "user_form": user_form,
+        }
+        return self.render_to_response(context)
+
+
+class PasswordChangeView(LoginRequiredMixin, TemplateView):
+    template_name = "password.html"
+
+    def get(self, request):
+        form = PasswordChangeForm(user=request.user)
+        context = {
+            "title": "Change password",
+            "form": form,
+        }
+        return self.render_to_response(context)
+
+    def post(self, request):
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            form.save()
+
+            update_session_auth_hash(request, form.user)
+            messages.add_message(request, messages.SUCCESS, "Your password was successfully updated!")
+
+        context = {
+            "title": "Change password",
+            "form": form,
+        }
+        return self.render_to_response(context)
 
 
 class ProfileProjectListView(LoginRequiredMixin, ListView):
@@ -23,16 +77,6 @@ class ProfileProjectListView(LoginRequiredMixin, ListView):
         data = super().get_context_data(**kwargs)
         data["title"] = self.request.user.username + ("" if not self.request.user.full_name else f" ({self.request.user.full_name})")
         return data
-
-
-def profile(request, username):
-    user = get_object_or_404(User, username=username)
-
-    context = {
-        "title": user.username + ("" if not user.full_name else f" ({user.full_name})"),
-        "user": user,
-    }
-    return render(request, "profile.html", context)
 
 
 def signup_view(request):
