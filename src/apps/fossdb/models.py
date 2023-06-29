@@ -73,10 +73,6 @@ class Project(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
 
     @property
-    def star_amount(self):
-        return self.star.count()
-
-    @property
     def runs_on_macos(self):
         return self.operating_system.filter(operating_system__name="macOS").exists()
 
@@ -137,8 +133,3 @@ class ProjectHostingPlatform(models.Model):
 
     def __str__(self):
         return self.url
-
-
-class Star(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
