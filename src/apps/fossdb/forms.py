@@ -1,4 +1,5 @@
 from django import forms
+from django.forms import inlineformset_factory
 
 from .models import HostingPlatform, ProgrammingLanguage, Project, ProjectHostingPlatform, ProjectProgrammingLanguage
 
@@ -61,7 +62,19 @@ class ProjectForm(forms.ModelForm):
                     "placeholder": "Description",
                 }
             ),
-            "license": forms.CheckboxSelectMultiple(),
-            "tag": forms.CheckboxSelectMultiple(),
-            "operating_system": forms.CheckboxSelectMultiple(),
+            # "license": forms.CheckboxSelectMultiple(),
+            # "tag": forms.CheckboxSelectMultiple(),
+            # "operating_system": forms.CheckboxSelectMultiple(),
         }
+
+
+ProgrammingLanguageInlineFormSet = inlineformset_factory(
+    Project,
+    ProjectProgrammingLanguage,
+    fields=(
+        "programming_language",
+        "percentage",
+    ),
+    extra=1,
+    can_delete=True,
+)

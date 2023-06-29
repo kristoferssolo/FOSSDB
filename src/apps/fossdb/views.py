@@ -1,5 +1,4 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.forms import inlineformset_factory
 from django.shortcuts import redirect
 from django.views.generic import CreateView, DeleteView, DetailView, UpdateView
 
@@ -7,15 +6,8 @@ from django_filters.views import FilterView
 
 from .filters import ProjectFilter
 
-from .forms import HostingPlatformForm, ProgrammingLanguageForm, ProjectForm
-from .models import Project, ProjectProgrammingLanguage
-
-ProgrammingLanguageInlineFormset = inlineformset_factory(
-    Project,
-    ProjectProgrammingLanguage,
-    form=ProgrammingLanguageForm,
-    extra=1,
-)
+from .forms import HostingPlatformForm, ProgrammingLanguageInlineFormSet, ProjectForm
+from .models import Project
 
 
 class ProjectListView(FilterView):
@@ -35,30 +27,29 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
-        data["hosting_platform"] = HostingPlatformForm(self.request.POST or None, prefix="hosting")
-        data["programming_language"] = ProgrammingLanguageInlineFormset(self.request.POST or None, prefix="language")
-        data["empty_form"] = ProgrammingLanguageInlineFormset(prefix="language_empty")
+        data["hosting_platform"] = HostingPlatformForm(self.request.POST or None)
+        data["programming_languages"] = ProgrammingLanguageInlineFormSet(self.request.POST or None)
         return data
 
     def form_valid(self, form):
         context = self.get_context_data()
+
         form.instance.owner = self.request.user
+
+        self.object = form.save()  # Save project form
+
         hosting_platform = context["hosting_platform"]
-        programming_language = context["programming_language"]
-        self.object = form.save()
         if hosting_platform.is_valid():
-            hosting_platform.instance.project = self.object
+            hosting_platform = hosting_platform.save(commit=False)
+            hosting_platform.project = self.object
             hosting_platform.save()
-        # TODO: allow adding multiple languages
-        if programming_language.is_valid():
-            for instance in programming_language.save(commit=False):
-                instance.project = self.object
-                instance.save()
-        programming_language.save_m2m()
-        if hosting_platform.is_valid() and programming_language.is_valid():
-            return super().form_valid(form)
-        else:
-            return self.render_to_response(self.get_context_data(form=form))
+
+        programming_languages = context["programming_languages"]
+        if programming_languages.is_valid():
+            programming_languages.instance = self.object
+            programming_languages.save()
+
+        return super().form_valid(form)
 
 
 class ProjectDetailView(DetailView):
@@ -85,11 +76,29 @@ class ProjectUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return redirect("login")
 
     def get_context_data(self, *args, **kwargs):
-        data = super(ProjectUpdateView, self).get_context_data(**kwargs)
-        data["hosting_platform"] = HostingPlatformForm(self.request.POST or None, instance=self.object.projecthostingplatform, prefix="hosting")
-        data["programming_language"] = ProgrammingLanguageInlineFormset(self.request.POST or None, instance=self.object, prefix="language")
-        data["empty_form"] = ProgrammingLanguageInlineFormset(prefix="language_empty")
+        data = super().get_context_data(**kwargs)
+        data["hosting_platform"] = HostingPlatformForm(self.request.POST or None, instance=self.object.projecthostingplatform)
+        data["programming_languages"] = ProgrammingLanguageInlineFormSet(self.request.POST or None, instance=self.object)
         return data
+
+    def form_valid(self, form):
+        context = self.get_context_data()
+
+        form.instance.owner = self.request.user
+
+        self.object = form.save()  # Save project form
+
+        hosting_platform = context["hosting_platform"]
+        if hosting_platform.is_valid():
+            hosting_platform.project = self.object
+            hosting_platform.save()
+
+        programming_languages = context["programming_languages"]
+        if programming_languages.is_valid():
+            programming_languages.instance = self.object
+            programming_languages.save()
+
+        return super().form_valid(form)
 
 
 class ProjectDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
