@@ -1,8 +1,8 @@
 from django import forms
 
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserChangeForm as BaseUserChangeForm, UserCreationForm
 
-from .models import User
+from .models import Profile, User
 
 
 class LoginForm(AuthenticationForm):
@@ -67,4 +67,67 @@ class SignUpForm(UserCreationForm):
             "email": "",
             "password1": "",
             "password2": "",
+        }
+
+
+class UserChangeForm(BaseUserChangeForm):
+    class Meta(BaseUserChangeForm.Meta):
+        model = User
+        fields = (
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+        )
+        widgets = {
+            "username": forms.TextInput(
+                attrs={
+                    "placeholder": "Username",
+                    "class": "form-field submit-form",
+                }
+            ),
+            "email": forms.EmailInput(
+                attrs={
+                    "placeholder": "Email",
+                    "class": "form-field submit-form",
+                }
+            ),
+            "first_name": forms.TextInput(
+                attrs={
+                    "placeholder": "First Name",
+                    "class": "form-field submit-form",
+                }
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "placeholder": "Last Name",
+                    "class": "form-field submit-form",
+                }
+            ),
+        }
+        labels = {
+            "username": "",
+            "email": "",
+            "first_name": "",
+            "last_name": "",
+        }
+
+        help_text = {
+            "username": None,
+            "email": None,
+            "first_name": None,
+            "last_name": None,
+        }
+
+
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ("picture",)
+        labels = {
+            "picture": "",
+        }
+
+        help_text = {
+            "picture": None,
         }
