@@ -111,10 +111,10 @@
         </div>
         {% if user == project.owner %}
             <div class="flex justify-between mt-8 mx-16">
-                <button class="px-12 py-2 border border-transparent rounded-md text-gray-500 bg-skyblue-300 hover:opacity-60 transform ease-in-out duration-500">
+                <button class="button submit-button-enabled text-gray-500 bg-skyblue-300">
                     <a href="{% url 'project-update' project.owner project.name %}">Update</a>
                 </button>
-                <button class="px-12 py-2 border border-transparent rounded-md text-gray-500 bg-burlywood hover:opacity-60 transform ease-in-out duration-500">
+                <button class="button submit-button-enabled text-gray-500 bg-burlywood hover:opacity-60">
                     <a href="{% url 'project-delete' project.owner project.name %}">Delete</a>
                 </button>
             </div>

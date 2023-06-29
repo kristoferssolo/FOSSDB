@@ -1,3 +1,11 @@
+Array.from(document.getElementsByClassName("remove-btn")).forEach((button) => {
+    button.addEventListener("click", () => {
+        console.log("TRUE")
+        const hiddenDeleteInput = button.previousElementSibling
+        hiddenDeleteInput.value = "on"
+        button.parentElement.style.display = "none"
+    })
+})
 window.addEventListener("DOMContentLoaded", () => {
     const FORM_VERIFY = document.getElementsByClassName("verify")
     const SUBMIT_BUTTON = document.getElementById("submit-button")
@@ -10,30 +18,26 @@ window.addEventListener("DOMContentLoaded", () => {
             )
             if (ALL_FILLED) {
                 SUBMIT_BUTTON.classList.remove(
-                    "bg-slategray-200",
+                    "submit-button-disabled",
                     "text-lightsteelblue-100",
-                    "opacity-50",
-                    "cursor-default"
+                    "bg-slategray-200"
                 )
                 SUBMIT_BUTTON.classList.add(
-                    "bg-skyblue-300",
+                    "submit-button-enabled",
                     "text-gray-500",
-                    "opacity-100",
-                    "hover:opacity-60"
+                    "bg-skyblue-300"
                 )
                 SUBMIT_BUTTON.disabled = false
             } else {
                 SUBMIT_BUTTON.classList.remove(
-                    "bg-skyblue-300",
+                    "submit-button-enabled",
                     "text-gray-500",
-                    "opacity-100",
-                    "hover:opacity-60"
+                    "bg-skyblue-300"
                 )
                 SUBMIT_BUTTON.classList.add(
-                    "bg-slategray-200",
+                    "submit-button-disabled",
                     "text-lightsteelblue-100",
-                    "opacity-50",
-                    "cursor-default"
+                    "bg-slategray-200"
                 )
                 SUBMIT_BUTTON.disabled = true
             }

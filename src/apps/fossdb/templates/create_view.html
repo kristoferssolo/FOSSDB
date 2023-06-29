@@ -3,32 +3,77 @@
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}{% endblock %}
 {% block content %}
-    <form method="post" id="project-form">
+    <form class="flex flex-col items-center justify-center space-y-4 my-auto font-condensed"
+          method="post"
+          id="project-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        {{ hosting_platform.management_form }}
-        {{ hosting_platform.as_table }}
-        <div id="language-formset">
-            {{ programming_language.management_form }}
-            {% for form in programming_language %}<div class="language-form">{{ form.as_table }}</div>{% endfor %}
+        {{ form.name }}
+        {{ form.description }}
+        <div class="flex gap-4 justify-center">
+            <div class="">
+                <p class="text-xl font-abel text-center">Licenses</p>
+                {{ form.license }}
+            </div>
+            <div>
+                <p class="text-xl font-abel text-center">Tags</p>
+                {{ form.tag }}
+            </div>
+            <div>
+                <p class="text-xl font-abel text-center">Operating systems</p>
+                {{ form.operating_system }}
+            </div>
         </div>
-        <!-- This button will trigger the JS to append another language form -->
-        <button type="button" id="add-more">+</button>
-        <!-- Render the empty form, which you'll use as a template for new entries -->
-        <!-- Wrap it in a container so you can reference it by id and hide it -->
-        <div id="empty-form" style="display:none;">{{ empty_form.as_table }}</div>
-        <button type="submit">Submit</button>
+        {{ hosting_platform.management_form }}
+        <div class="flex gap-4 items-center">
+            <p class="text-xl font-abel">Hosting platform:</p>
+            {{ hosting_platform }}
+        </div>
+        {{ programming_languages.management_form }}
+        <!-- Languages container -->
+        <div class="" id="languages-container">
+            {% for language in programming_languages %}
+                <div class="languages flex gap-4 items-center">
+                    {{ language.programming_language }}
+                    {{ language.percentage }}
+                </div>
+            {% endfor %}
+        </div>
+        <!-- Hidden empty form used as a template -->
+        <div id="empty-form" style="display:none">
+            <div class="flex gap-4 items-center">
+                {{ programming_languages.empty_form.programming_language }}
+                {{ programming_languages.empty_form.percentage }}
+                <button class="button submit-button-enabled text-gray-500 bg-indianred-100 remove-btn"
+                        type="button">Remove</button>
+            </div>
+        </div>
+        <div class="flex justify-between">
+            <button class="button submit-button-enabled bg-skyblue-300 text-gray-500"
+                    type="button"
+                    id="add-language">+</button>
+        </div>
+        <button class="button submit-button-enabled bg-mediumaquamarine text-gray-500"
+                ype="submit">Save</button>
     </form>
-    <script>
-        document.querySelector("#add-more").addEventListener("click", function() {
-            var formIndex = document.querySelector("#id_language-TOTAL_FORMS").value;
-            var emptyFormDiv = document.querySelector("#empty-form");
-            var newFormHTML = emptyFormDiv.innerHTML.replace(/__prefix__/g, formIndex);
-            var newFormDiv = document.createElement("div");
-            newFormDiv.className = "language-form";
-            newFormDiv.innerHTML = newFormHTML;
-            document.querySelector("#language-formset").append(newFormDiv);
-            document.querySelector("#id_language-TOTAL_FORMS").value = parseInt(formIndex) + 1;
+    <script type="text/javascript">
+        window.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("add-language").addEventListener("click", () => {
+                var formIndex = document.getElementById("id_projectprogramminglanguage_set-TOTAL_FORMS");
+                var emptyForm = document.getElementById("empty-form").innerHTML;
+
+                emptyForm = emptyForm.replace(/__prefix__/g, formIndex.value);
+
+                document.getElementById("languages-container")
+                    .insertAdjacentHTML("beforeend", emptyForm);
+
+                formIndex.value = parseInt(formIndex.value) + 1;
+            })
+            document.getElementById("languages-container").addEventListener("click", (e) => {
+                if (e.target && e.target.classList.contains("remove-btn")) {
+                    e.target.previousElementSibling.previousElementSibling.value = "";
+                    e.target.parentElement.style.display = "none"
+                }
+            });
         });
     </script>
 {% endblock %}

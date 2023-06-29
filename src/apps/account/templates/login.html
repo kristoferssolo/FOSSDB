@@ -12,21 +12,20 @@
                placeholder="Username"
                name="username"
                value="{{ form.username.value|default:'' }}"
-               class="verify mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300" />
+               class="verify form-field submit-form" />
         {% if form.username.errors %}<p class="text-indianred-100 text-xs italic">{{ form.username.errors }}</p>{% endif %}
         <input type="password"
                placeholder="Password"
                name="password"
                value="{{ form.username.value|default:'' }}"
-               class="verify mt-1 block rounded-md border-2 border-slategray-200 hover:border-lightsteelblue-100 bg-gray-300 placeholder-lightsteelblue-100 focus:border-cadetblue-300" />
+               class="verify form-field submit-form" />
         {% if form.password.errors %}<p class="text-indianred-100 text-xs italic">{{ form.password.errors }}</p>{% endif %}
         <button type="submit"
                 id="submit-button"
-                class="px-12 py-2 border border-transparent rounded-md text-lightsteelblue-100 bg-slategray-200 opacity-50 transform ease-in-out duration-500 cursor-default">
-            Login
-        </button>
+                class="button submit-button-disabled text-lightsteelblue-100 bg-slategray-200">Login</button>
         <p>
-            Don't have an account? Create one <a class="underline text-skyblue-300" href="{% url 'signup' %}">Here</a>!
+            Don't have an account? Create one <a class="underline text-skyblue-300 hover:text-cadetblue-300 transform duration-300 ease-in-out"
+    href="{% url 'signup' %}">Here</a>!
         </p>
     </form>
 {% endblock %}
