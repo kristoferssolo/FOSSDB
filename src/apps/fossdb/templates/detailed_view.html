@@ -97,7 +97,7 @@
                 {% endfor %}
             </div>
             <!-- text -->
-            <p class="text-justify font-roboto my-12">{{ project.description }}</p>
+            <div class="text-justify font-roboto my-12">{{ project.description|linebreaks }}</div>
             <div class="">
                 <!-- hosting platform and licenses on one line -->
                 <div class="flex justify-between w-full mt-4 font-abel">
