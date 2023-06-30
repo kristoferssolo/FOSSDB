@@ -2,7 +2,6 @@ import uuid
 from pathlib import Path
 
 from django.contrib.auth.models import AbstractUser
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -10,7 +9,7 @@ from django.dispatch import receiver
 
 def get_profile_pic_path(instance, filename) -> Path:
     ext = filename.split(".")[-1]
-    filename = f"{instance.id}.{ext}"
+    filename = f"{instance.user.id}.{ext}"
     return Path("profile-pics", filename)
 
 
@@ -40,18 +39,13 @@ class Profile(models.Model):
         return f"{self.user.username} Profile"
 
     def save(self, *args, **kwags):
-        old_instance = None
-        if self.pk:
-            try:
-                old_instance = User.objects.get(pk=self.pk)
-            except ObjectDoesNotExist:
-                pass
-        super(Profile, self).save(*args, **kwags)
+        old_instance = Profile.objects.get(pk=self.pk) if self.pk else None
+        super().save(*args, **kwags)
 
         # Check if old instance exists and profile picture is different
         if old_instance is not None:
-            if old_instance.profile_picture and self.picture and old_instance.profile_picture.url != self.picture.url:
-                old_instance.profile_picture.delete(save=False)
+            if old_instance.picture and self.picture and old_instance.picture.url != self.picture.url:
+                old_instance.picture.delete(save=False)
 
 
 @receiver(post_save, sender=User)
