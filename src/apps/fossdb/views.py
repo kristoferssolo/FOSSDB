@@ -44,7 +44,7 @@ class ProfileProjectListView(ListView):
     def get_queryset(self):
         username = self.kwargs.get("username")
         self.user = get_object_or_404(get_user_model(), username=username)
-        return Project.objects.filter(owner__username=username)
+        return Project.objects.filter(owner__username=username).order_by("-date_created")
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
@@ -58,6 +58,9 @@ class ProjectListView(ListView):
     template_name = "explore.html"
     context_object_name = "projects"
     paginate_by = 50  # amount of items on screen
+
+    def get_queryset(self):
+        return Project.objects.order_by('-date_created')
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
