@@ -6,6 +6,11 @@
     <div class="py-8 px-32">
         {% if user.is_authenticated and user == page_owner %}
             <div class="flex justify-end gap-4">
+                {% if user.is_staff %}
+                    <a href="/admin">
+                        <i class="fa-solid fa-users-gear fa-2xl"></i>
+                    </a>
+                {% endif %}
                 <a href="{% url "logout" %}">
                     <i class="fa-solid fa-right-from-bracket fa-2xl"></i>
                 </a>
