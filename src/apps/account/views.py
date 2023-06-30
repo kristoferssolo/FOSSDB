@@ -4,9 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, TemplateView, View
-
-from fossdb.models import Project
+from django.views.generic import TemplateView, View
 
 from .forms import LoginForm, SignUpForm, UserChangeForm
 
@@ -62,22 +60,6 @@ class PasswordChangeView(LoginRequiredMixin, TemplateView):
             "form": form,
         }
         return self.render_to_response(context)
-
-
-class ProfileProjectListView(LoginRequiredMixin, ListView):
-    model = Project
-    template_name = "profile.html"
-    context_object_name = "projects"
-    login_url = reverse_lazy("login")
-    redirect_field_name = "redirect_to"
-
-    def get_queryset(self):
-        return Project.objects.filter(owner=self.request.user)
-
-    def get_context_data(self, *args, **kwargs):
-        data = super().get_context_data(**kwargs)
-        data["title"] = self.request.user.username + ("" if not self.request.user.full_name else f" ({self.request.user.full_name})")
-        return data
 
 
 def signup_view(request):

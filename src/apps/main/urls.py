@@ -1,6 +1,5 @@
-from account.views import ProfileProjectListView
 from django.urls import path
-from fossdb.views import ProjectCreateView, ProjectListView, SearchResultsListView
+from fossdb.views import ProfileProjectListView, ProjectCreateView, ProjectListView, SearchResultsListView
 
 from . import views
 

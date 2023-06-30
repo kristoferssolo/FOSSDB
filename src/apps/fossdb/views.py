@@ -1,6 +1,7 @@
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.db.models import Q
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -31,6 +32,24 @@ class SearchResultsListView(ListView):
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
         data["title"] = "FOSSDB | Search"
+        return data
+
+
+class ProfileProjectListView(ListView):
+    model = Project
+    template_name = "profile.html"
+    context_object_name = "projects"
+    slug_field = "username"
+
+    def get_queryset(self):
+        username = self.kwargs.get("username")
+        self.user = get_object_or_404(get_user_model(), username=username)
+        return Project.objects.filter(owner__username=username)
+
+    def get_context_data(self, *args, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data["title"] = self.user.username + ("" if not self.user.full_name else f" ({self.user.full_name})")
+        data["page_owner"] = self.user
         return data
 
 

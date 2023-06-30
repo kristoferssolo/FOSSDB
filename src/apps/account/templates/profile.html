@@ -4,15 +4,24 @@
 {% block meta %}{% endblock %}
 {% block content %}
     <div class="py-8 px-32">
-        <div class="flex justify-end gap-4">
-            <a href="{% url "logout" %}">
-                <i class="fa-solid fa-right-from-bracket fa-2xl"></i>
-            </a>
-            <a href="{% url "settings" %}">
-                <i class="fa-solid fa-gear fa-2xl"></i>
-            </a>
-        </div>
-        <h1 class="font-abel text-4xl mb-8">My Projects</h1>
+        {% if user.is_authenticated and user == page_owner %}
+            <div class="flex justify-end gap-4">
+                <a href="{% url "logout" %}">
+                    <i class="fa-solid fa-right-from-bracket fa-2xl"></i>
+                </a>
+                <a href="{% url "settings" %}">
+                    <i class="fa-solid fa-gear fa-2xl"></i>
+                </a>
+            </div>
+        {% endif %}
+        <h1 class="font-abel text-4xl mb-8">
+            {% if user.is_authenticated and user == page_owner %}
+                My
+            {% else %}
+                {{ page_owner }}
+            {% endif %}
+            Projects
+        </h1>
         <div class="grid grid-cols-1 gap-4">
             {% for project in projects %}
                 <div class="border border-steelblue-100 p-8 flex flex-row gap-4 justify-between">
