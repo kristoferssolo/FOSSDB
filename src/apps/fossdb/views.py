@@ -60,7 +60,7 @@ class ProjectListView(ListView):
     paginate_by = 50  # amount of items on screen
 
     def get_queryset(self):
-        return Project.objects.order_by('-date_created')
+        return Project.objects.order_by("-date_created")
 
     def get_context_data(self, *args, **kwargs):
         data = super().get_context_data(**kwargs)
