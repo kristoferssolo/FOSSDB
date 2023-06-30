@@ -7,14 +7,17 @@
         {% if user.is_authenticated and user == page_owner %}
             <div class="flex justify-end gap-4">
                 {% if user.is_staff %}
-                    <a href="/admin">
+                    <a href="/admin"
+                       class="hover:text-skyblue-300 transition duration-300 ease-linear p-2">
                         <i class="fa-solid fa-users-gear fa-2xl"></i>
                     </a>
                 {% endif %}
-                <a href="{% url "logout" %}">
+                <a href="{% url "logout" %}"
+                   class="hover:text-skyblue-300 transition duration-300 ease-linear p-2">
                     <i class="fa-solid fa-right-from-bracket fa-2xl"></i>
                 </a>
-                <a href="{% url "settings" %}">
+                <a href="{% url "settings" %}"
+                   class="hover:text-skyblue-300 transition duration-300 ease-linear p-2">
                     <i class="fa-solid fa-gear fa-2xl"></i>
                 </a>
             </div>
