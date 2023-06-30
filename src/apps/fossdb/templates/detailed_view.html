@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% load static %}
+{% load static custom_filters %}
 {% block title %}{{ project.owner }}/{{ project.name }}{% endblock %}
 {% block meta %}
-    <script src="{% static 'js/buttons.js' %}" defer></script>
+    <script src="{% static "js/buttons.js" %}" defer></script>
 {% endblock meta %}
 {% block content %}
     <div class="mx-auto font-condensed max-w-[60%] min-w-[32rem]">
         <div class="p-8">
             <h1 class="text-center text-4xl font-abel">{{ project.name }}</h1>
             <h2 class="text-center text-2xl font-abel">
-                <a href="{% url 'profile' project.owner.username %}">By <span class="underline">{{ project.owner }}</span></a>
+                <a href="{% url "profile" project.owner.username %}">By <span class="underline">{{ project.owner }}</span></a>
             </h2>
             <!-- os platform icons -->
             <div class="my-4 flex justify-center items-center gap-x-4">
@@ -139,10 +139,10 @@
         </div>
         {% if user == project.owner %}
             <div class="flex justify-between mt-8 mx-16">
-                <a href="{% url 'project-update' project.owner project.name %}">
+                <a href="{% url "project-update" project.owner project.name %}">
                     <button class="button hover:bg-opacity-60 bg-mediumpurple-100 text-gray-500">Update</button>
                 </a>
-                <a href="{% url 'project-delete' project.owner project.name %}">
+                <a href="{% url "project-delete" project.owner project.name %}">
                     <button class="button hover:bg-opacity-60 bg-lightcoral text-gray-500">Delete</button>
                 </a>
             </div>

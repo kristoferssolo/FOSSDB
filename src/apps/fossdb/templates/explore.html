@@ -4,13 +4,13 @@
 {% block meta %}{% endblock %}
 {% block content %}
     <div class="py-8 px-16">
-        <h1 class="font-abel text-4xl mb-8">Projects</h1>
+        <h1 class="font-abel text-4xl mb-8 font-bold">Projects</h1>
         <div class="grid grid-cols-2 gap-4">
             {% for project in projects %}
                 <div class="border border-steelblue-100 p-8 flex flex-row gap-4 justify-between">
                     <a href="{{ project.get_absolute_url }}"
                        class="hover:text-steelblue-100 transition duration-300 ease-linear">
-                        <h2 class="font-abel text-2xl">{{ project.name }}</h2>
+                        <h2 class="font-abel text-3xl font-semibold">{{ project.name }}</h2>
                     </a>
                     <p class="max-w-xs text-justify">{{ project.description|slice:500 }}</p>
                 </div>
