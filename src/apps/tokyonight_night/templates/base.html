@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
     <head>
-        <link rel="icon" href="{% static 'img/icons/logo.svg' %}" />
+        <link rel="icon" href="{% static "img/icons/logo.svg" %}" />
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -16,8 +16,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
               rel="stylesheet" />
         {% tailwind_css %}
-        <link href="{% static 'fontawesomefree/css/all.min.css' %}"
-              rel="stylesheet" />
+        <link href="{% static "fontawesomefree/css/all.min.css" %}" rel="stylesheet" />
         {% block meta %}{% endblock %}
         <title>
             {% block title %}{% endblock %}
@@ -27,16 +26,13 @@
         <header class="flex justify-between items-center px-6 py-2 font-abel text-xl">
             <div class="flex justify-between">
                 <!-- logo -->
-                <div class="flex items-center text-4xl font-rationale">
-                    <img class=""
-                         width="40"
-                         src="{% static 'img/icons/logo.svg' %}"
-                         alt="logo" />
+                <div class="flex items-center text-5xl font-rationale font-bold">
+                    <img class="" width="40" src="{% static "img/icons/logo.svg" %}" alt="logo" />
                     <a class="hover:text-skyblue-300 transform duration-300 ease-linear"
-                       href="{% url 'homepage' %}">foss<span class="text-skyblue-300">db</span></a>
+                       href="{% url "homepage" %}">foss<span class="text-skyblue-300">db</span></a>
                 </div>
                 <!-- search -->
-                <form action="{% url 'search' %}"
+                <form action="{% url "search" %}"
                       method="get"
                       class="relative items-center flex">
                     <input type="text"
@@ -46,15 +42,15 @@
                 </form>
                 <!-- navbar -->
                 <nav class="uppercase flex gap-x-6 items-center">
-                    <a href="{% url 'explore' %}"
+                    <a href="{% url "explore" %}"
                        class="hover:text-skyblue-300 transform duration-200 ease-linear">explore</a>
-                    <a href="{% url 'contribute' %}"
+                    <a href="{% url "contribute" %}"
                        class="hover:text-skyblue-300 transform duration-200 ease-linear">contribute</a>
-                    <a href="{% url 'news' %}"
+                    <a href="{% url "news" %}"
                        class="hover:text-skyblue-300 transform duration-200 ease-linear">news</a>
-                    <a href="{% url 'dashboard' %}"
+                    <a href="{% url "dashboard" %}"
                        class="hover:text-skyblue-300 transform duration-200 ease-linear">dashboard</a>
-                    <a href="{% url 'help' %}"
+                    <a href="{% url "help" %}"
                        class="hover:text-skyblue-300 transform duration-200 ease-linear">help</a>
                 </nav>
             </div>
@@ -63,12 +59,12 @@
                 {% if user.is_authenticated %}
                     <div class="flex items-center justify-between">
                         <p class="mx-4">{{ user.username }}</p>
-                        <a href="{% url 'profile' user.username %}">
+                        <a href="{% url "profile" user.username %}">
                             <img src="{{ user.profile.picture.url }}" class="w-[2rem]" alt="pic" />
                         </a>
                     </div>
                 {% else %}
-                    <a href="{% url 'login' %}"
+                    <a href="{% url "login" %}"
                        class="hover:text-skyblue-300 transition duration-300 ease-linear"><i class="fa-solid fa-user fa-lg ml-4 "></i></a>
                 {% endif %}
             </div>
@@ -76,8 +72,8 @@
         <main class="flex flex-col flex-grow">
             {% block content %}{% endblock %}
         </main>
-        <footer class="w-full h-32 flex items-center text-slategray-200 bg-gray-500 mt-32 font-condensed border-gradient-horizontal">
-            <div class="p-8">
+        <footer class="w-full h-auto flex text-slategray-200 bg-gray-500 mt-32 font-condensed border-gradient-horizontal mb-2">
+            <div class="p-8 w-full flex justify-between">
                 <div class="space-y-4 text-left">
                     <p>
                         FOSSDB is a passion project of <a class="underline"
@@ -86,8 +82,22 @@
                     </p>
                     <!-- TODO: finish these sentences -->
                     <p>This site has no affiliation with GitHub or any other hosting platform.</p>
+                    <p>
+                        P. S. All users with "_bot" are generated by the site owner. If you are the original owner, please contact the administrator.
+                    </p>
                 </div>
-                <div></div>
+                <div class="">
+                    <div class="flex items-center justify-center gap-4">
+                        <p>Have some feedback? Come chat with us!</p>
+                        <a href="">
+                            <img class="w-10" src="{% static "img/icons/discord.svg" %}" alt="discord" />
+                        </a>
+                        <a href="">
+                            <img class="w-10" src="{% static "img/icons/irc.svg" %}" alt="matrix" />
+                        </a>
+                        <div class="flex justify-center gap-4"></div>
+                    </div>
+                </div>
             </div>
         </footer>
     </body>

@@ -2,7 +2,7 @@
 {% load static %}
 {% block title %}{{ title }}{% endblock %}
 {% block meta %}
-    <script src="{% static 'js/buttons.js' %}" defer></script>
+    <script src="{% static "js/buttons.js" %}" defer></script>
 {% endblock meta %}
 {% block content %}
     <form method="post"
@@ -14,7 +14,7 @@
                 class="button submit-button-disabled text-lightsteelblue-100 bg-slategray-200">Login</button>
         <p>
             Don't have an account? Create one <a class="underline text-skyblue-300 hover:text-cadetblue-300 transform duration-300 ease-linear"
-    href="{% url 'signup' %}">Here</a>!
+    href="{% url "signup" %}">Here</a>!
         </p>
     </form>
 {% endblock %}

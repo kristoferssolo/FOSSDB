@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login, logout, update_session_auth
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, TemplateView, View
 
 from fossdb.models import Project
@@ -12,7 +13,7 @@ from .forms import LoginForm, SignUpForm, UserChangeForm
 
 class ProfileUpdateView(LoginRequiredMixin, TemplateView):
     template_name = "setting.html"
-    login_url = "/login/"
+    login_url = reverse_lazy("login")
     redirect_field_name = "redirect_to"
 
     def get(self, request):
@@ -67,7 +68,7 @@ class ProfileProjectListView(LoginRequiredMixin, ListView):
     model = Project
     template_name = "profile.html"
     context_object_name = "projects"
-    login_url = "/login/"
+    login_url = reverse_lazy("login")
     redirect_field_name = "redirect_to"
 
     def get_queryset(self):

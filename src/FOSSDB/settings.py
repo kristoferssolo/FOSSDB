@@ -35,19 +35,19 @@ DEBUG = config["DEBUG"]
 # Application definition
 
 INSTALLED_APPS = [
-    "fossdb",
-    "account",
-    "main",
-    "search_views",
-    "tailwind",
-    "tokyonight_night",
-    "fontawesomefree",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "account",
+    "main",
+    "fossdb",
+    "search_views",
+    "tailwind",
+    "tokyonight_night",
+    "fontawesomefree",
 ]
 
 TAILWIND_APP_NAME = "tokyonight_night"

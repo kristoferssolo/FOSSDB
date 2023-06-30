@@ -123,14 +123,6 @@ module.exports = {
             ],
             roboto: ["Roboto", "Helvetica", "Arial", "sans-serif"],
         },
-        fontSize: {
-            base: "1rem",
-            xl: "1.25rem",
-            "2xl": "1.5rem",
-            "3xl": "2rem",
-            "4xl": "4rem",
-            xs: "0.75rem",
-        },
         extend: {},
     },
     plugins: [
