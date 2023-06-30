@@ -19,6 +19,9 @@
                 </a>
             </div>
         {% endif %}
+        <img src="{{ page_owner.profile.picture.url }}"
+             class="max-w-xs p-8 pl-0"
+             alt="{{ page_owner.username }} profile picture" />
         <h1 class="font-abel text-4xl mb-8">
             {% if user.is_authenticated and user == page_owner %}
                 My
