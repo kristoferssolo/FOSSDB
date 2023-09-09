@@ -128,11 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-
-config.json
-debug
-
 local-cdn/
-config.json
 node_modules/
 package-lock.json
