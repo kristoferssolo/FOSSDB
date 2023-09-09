@@ -1,16 +1,19 @@
 # FOSSDB
-
-![Django Test](https://github.com/kristoferssolo/FOSSDB/actions/workflows/test.yml/badge.svg)  
-![Ruff](https://github.com/kristoferssolo/FOSSDB/actions/workflows/ruff.yml/badge.svg)  
-
+# 
+![](https://github.com/kristoferssolo/FOSSDB/actions/workflows/test.yml/badge.svg)  ![](https://github.com/kristoferssolo/FOSSDB/actions/workflows/ruff.yml/badge.svg)  
 
 FOSSDB is an open-source web application that helps users find, contribute, and collaborate on free and open-source software (FOSS) projects.
 
 ## Table of Contents
+
+<!-- toc -->
+
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [License](#license)
+
+<!-- tocstop -->
 
 ## Installation
 1. Clone the repository and `cd` into it.
